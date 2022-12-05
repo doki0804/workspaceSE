@@ -13,7 +13,15 @@ public class FileWriterReaderCopyMain {
 		while(true) {
 			int readChar = fr.read();
 			if(readChar==-1)break;
-			
+			if(readChar=='.') {
+				fw.write(readChar);
+				fw.write("\n");
+			}else if(readChar=='-') {
+				fw.write(readChar);
+				fw.write(" page");
+			}else {
+				fw.write(readChar);
+			}
 			
 		}
 		
