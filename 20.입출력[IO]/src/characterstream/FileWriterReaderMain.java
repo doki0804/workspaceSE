@@ -1,5 +1,6 @@
 package characterstream;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -35,7 +36,34 @@ public class FileWriterReaderMain {
 		fw.close();
 		System.out.println("FileWriter.write() ---> fileWriter.txt");
 		
+		FileReader fr = new FileReader("fileWriter.txt");
 		
+		int readChar = fr.read();
+		System.out.println("1.readChar : "+(char)readChar);
+		readChar = fr.read();
+		System.out.println("2.readChar : "+(char)readChar);
+		readChar = fr.read();
+		System.out.println("3.readChar : "+(char)readChar);
+		int charCount = 0;
+		int lineCount = 0;
+		int munjaCount = 0;
+		while(true) {
+			readChar = fr.read();
+			if(readChar==-1)break;
+			charCount++;
+			if(readChar=='\n') {
+				lineCount++;
+			}
+			if(readChar=='인') {
+				munjaCount++;
+			}
+			System.out.print((char)readChar);
+		}
+		fr.close();
+		System.out.println();
+		System.out.println(charCount+"문자 읽음");
+		System.out.println(lineCount+"라인 읽음");
+		System.out.println(munjaCount+"개(인)");
 		
 	}
 }
