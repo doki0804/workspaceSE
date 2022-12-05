@@ -3,7 +3,7 @@ package characterstream;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriteReaderMain {
+public class FileWriterReaderMain {
 
 	public static void main(String[] args) throws Exception {
 		
@@ -34,6 +34,7 @@ public class FileWriteReaderMain {
 		fw.flush();
 		fw.close();
 		System.out.println("FileWriter.write() ---> fileWriter.txt");
+		
 		
 		
 	}
