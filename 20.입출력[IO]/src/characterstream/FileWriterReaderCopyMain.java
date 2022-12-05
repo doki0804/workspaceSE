@@ -2,7 +2,6 @@ package characterstream;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class FileWriterReaderCopyMain {
 
@@ -24,6 +23,10 @@ public class FileWriterReaderCopyMain {
 			}
 			
 		}
+		fw.flush();
+		
+		fr.close();
+		fw.close();
 		
 	}
 }
