@@ -70,10 +70,12 @@ public class FileMain {
 		for (File file : fileList) {
 			if(file.isDirectory()) {
 				//Directory
+				System.out.println("\tD : "+file.getName());
+				File[] subFileList = file.listFiles();
 				
 			}else {
 				//File
-				
+				System.out.println("\tF : "+file.getName());
 			}
 		}
 		
