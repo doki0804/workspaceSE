@@ -72,7 +72,9 @@ public class FileMain {
 				//Directory
 				System.out.println("\tD : "+file.getName());
 				File[] subFileList = file.listFiles();
-				
+				for (File subFile : subFileList) {
+					System.out.println("\t\t"+subFile.getName());
+				}
 			}else {
 				//File
 				System.out.println("\tF : "+file.getName());
