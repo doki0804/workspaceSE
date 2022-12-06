@@ -25,6 +25,25 @@ public class FileMain {
 		File file3 = new File("sample/subSample/00.VariableDeclare.txt");
 		File file4 = new File("C:\\01.JAVA_DEVELOPER\\workspaceSE\\20.입출력[IO]\\sample/subSample/00.VariableDeclare.txt");
 		
-		
+		System.out.println("---------1.file path[relative]---------");
+		System.out.println(file1.getPath());
+		System.out.println(file2.getPath());
+		System.out.println(file3.getPath());
+		System.out.println(file4.getPath());
+		System.out.println("---------2.file absolute path[relative]---------");
+		System.out.println(file1.getAbsolutePath());
+		System.out.println(file2.getAbsolutePath());
+		System.out.println(file3.getAbsolutePath());
+		System.out.println(file4.getAbsolutePath());
+		System.out.println("---------3.file name---------");
+		System.out.println(file1.getName());
+		System.out.println(file2.getName());
+		System.out.println(file3.getName());
+		System.out.println(file4.getName());
+		System.out.println("---------4.file parent[directory]---------");
+		System.out.println(file1.getParent());
+		System.out.println(file2.getParent());
+		System.out.println(file3.getParent());
+		System.out.println(file4.getParent());
 	}
 }
