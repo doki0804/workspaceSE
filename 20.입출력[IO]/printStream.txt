@@ -1,0 +1,5 @@
+프린트스트림을 공부합니다
+3.14159
+힣
+java.lang.Object@15db9742
+-------PrintStream.println() --> consleOut.println()-------
