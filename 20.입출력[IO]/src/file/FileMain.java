@@ -45,5 +45,42 @@ public class FileMain {
 		System.out.println(file2.getParent());
 		System.out.println(file3.getParent());
 		System.out.println(file4.getParent());
+		
+		File dir1 = new File("sample");
+		File dir2 = new File("sample/subSample");
+		File dir3 = new File("sample/subSample2");
+		
+		System.out.println("---------5.isDirectory,isFile----------");
+		System.out.println(dir1.isDirectory());
+		System.out.println(dir2.isDirectory());
+		System.out.println(dir3.isDirectory());
+		System.out.println(file1.isDirectory());
+		System.out.println(file2.isDirectory());
+		System.out.println(file3.isDirectory());
+		System.out.println(dir1.isFile());
+		System.out.println(dir2.isFile());
+		System.out.println(dir3.isFile());
+		System.out.println("---------6.디렉토리안에 파일(디렉토리)목록(String[])----------");
+		String[] fileNameList = dir1.list();
+		for(String fileName : fileNameList) {
+			System.out.println(fileName);
+		}
+		System.out.println("---------7.디렉토리안에 파일(디렉토리)목록(File[])----------");
+		File[] fileList = dir1.listFiles();
+		for (File file : fileList) {
+			if(file.isDirectory()) {
+				//Directory
+				
+			}else {
+				//File
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
 	}
 }
