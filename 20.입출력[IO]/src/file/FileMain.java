@@ -20,6 +20,10 @@ public class FileMain {
 		 */
 		
 		System.out.println(File.separatorChar);
+		File file1 = new File("데미안.txt");
+		File file2 = new File("sample\\ball.png");
+		File file3 = new File("sample/subSample/00.VariableDeclare.txt");
+		File file4 = new File("C:\\01.JAVA_DEVELOPER\\workspaceSE\\20.입출력[IO]\\sample/subSample/00.VariableDeclare.txt");
 		
 		
 	}
