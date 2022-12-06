@@ -17,9 +17,6 @@ public class BufferedWriterReaderCopyMain {
 		while(true) {
 			String readLine = br.readLine();
 			if(readLine==null)break;
-			
-			readLine=readLine.replace("제이든", "이원호");
-			
 			lineNo++;
 			bw.write("["+lineNo+"]"+readLine);
 			bw.newLine();
