@@ -73,14 +73,39 @@ public class FileMain {
 				System.out.println("\tD : "+file.getName());
 				File[] subFileList = file.listFiles();
 				for (File subFile : subFileList) {
-					System.out.println("\t\t"+subFile.getName());
+					System.out.println("\t\t└"+subFile.getName());
 				}
 			}else {
 				//File
 				System.out.println("\tF : "+file.getName());
 			}
 		}
+		System.out.println("---------8. root directory목록-----------");
+		File[] rootDriveFileList = File.listRoots();
+		for (File file : rootDriveFileList) {
+			System.out.println(file.getPath());
+		}
+		System.out.println("c:/ 파일목록출력");
+		File cDrive = rootDriveFileList[0];
+		File[] cDriveFilelist = cDrive.listFiles();
+		for (File file : cDriveFilelist) {
+			System.out.println(file.getPath());
+		}
+		System.out.println("---------10.디렉토리생성----------");
+		File newDir1 = new File("newDir1");
+		File newDir2 = new File("newDir2");
+		File newDir3 = new File("sample","subSample3");
+		File newDir4 = new File("C:/01.JAVA_DEVELOPER/newDir4");
 		
+		System.out.println(">> newDir1 디렉토리 존재여부 : "+newDir1.exists());
+		System.out.println(">> newDir2 디렉토리 존재여부 : "+newDir2.exists());
+		System.out.println(">> newDir3 디렉토리 존재여부 : "+newDir3.exists());
+		System.out.println(">> newDir4 디렉토리 존재여부 : "+newDir4.exists());
+		
+		System.out.println(">> newDir1 디텍토리 생성 : "+newDir1.mkdir());
+		System.out.println(">> newDir2 디텍토리 생성 : "+newDir2.mkdir());
+		System.out.println(">> newDir3 디텍토리 생성 : "+newDir3.mkdir());
+		System.out.println(">> newDir4 디텍토리 생성 : "+newDir4.mkdir());
 		
 		
 		
