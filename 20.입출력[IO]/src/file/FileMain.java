@@ -1,10 +1,11 @@
 package file;
 
 import java.io.File;
+import java.io.IOException;
 
 public class FileMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		/*
 		 * 현재파일경로[기준경로]
 		 *    eclipse --> C:\01.JAVA_DEVELOPER\workspaceSE\20.입출력[IO]
@@ -107,9 +108,19 @@ public class FileMain {
 		System.out.println(">> newDir3 디텍토리 생성 : "+newDir3.mkdir());
 		System.out.println(">> newDir4 디텍토리 생성 : "+newDir4.mkdir());
 		
-		
-		
-		
+		System.out.println("--------11.디렉토리 이름변경---------");
+		newDir2.renameTo(new File("renameDir2"));
+		System.out.println("--------12.디렉토리 삭제---------");
+		System.out.println("newDir3삭제여부 : "+newDir3.delete());
+		System.out.println("--------13.파일생성,삭제,이름변경---------");
+		File newFile1 = new File("newDir1","newFile1.txt");
+		File newFile2 = new File("newDir1","newFile2.txt");
+		File newFile3 = new File("C:\\01.JAVA_DEVELOPER\\newDir4\\newFile3.txt");
+		System.out.println("newFile1 생성여부 : "+newFile1.createNewFile());
+		System.out.println("newFile2 생성여부 : "+newFile2.createNewFile());
+		System.out.println("newFile3 생성여부 : "+newFile3.createNewFile());
+		System.out.println("newFile1 삭제여부 : "+newFile1.delete());
+		System.out.println(newFile3.renameTo(new File("renameFile2.txt")));
 		
 	}
 }
