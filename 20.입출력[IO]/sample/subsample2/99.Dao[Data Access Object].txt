@@ -1,0 +1,10 @@
+/*
+Dao(Data Access Object)
+ - 멤버들의 데이터를 저장하고있는 파일(테이블)에
+   CRUD(Create, Read, Update, Delete) 작업을 할수있는
+   단위메쏘드를 가지고있는 클래스
+
+ - MemberService객체의 요청(메쏘드호출)을 받아서 
+   Data Access(File, DB)에 관련된 단위기능(CRUD)을
+   수행하는 객체
+ */

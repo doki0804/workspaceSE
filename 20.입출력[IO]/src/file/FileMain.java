@@ -11,6 +11,8 @@ public class FileMain {
 		 * 
 		 * 상대경로(relative)경로
 		 * 		현재경로를 기준으로 경로를 기술하는 방법
+		 * 		sample\a.txt
+		 * 		.\sample\a.txt
 		 * 
 		 * 절대경로(absolute)경로
 		 * 		C:,D: 드라이브를 기준으로 경로를 기술하는 방법		
@@ -18,6 +20,7 @@ public class FileMain {
 		 */
 		
 		System.out.println(File.separatorChar);
-		System.out.println("C:\\01.JAVA_DEVELOPER\\workspaceSE\\20.입출력[IO]");
+		
+		
 	}
 }

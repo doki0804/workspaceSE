@@ -1,0 +1,10 @@
+
+	/*
+		형변환--> 숫자형데이타간에만 가능
+		    - 형식 :  (데이타타입)변수 or 리터럴;
+		    - 자동형변환(작은데이타-->큰데이타타입변수):promotion
+			     byte-->short-->int-->long-->float-->double
+		    - 자동형변환안됨(큰데이타-->작은데이타타입변수):casting
+			     double-->float-->long-->int-->short-->byte     
+       */
+		

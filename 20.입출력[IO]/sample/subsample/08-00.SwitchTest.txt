@@ -1,0 +1,19 @@
+ /*
+		switch 문
+		 - 형식
+		    switch(변수){
+		    	case 값_1:
+		    	  stmt1;
+		    	  break;
+		    	case 값_2:
+		    	  stmt2;
+		    	  break;  
+		        case 값_n:
+		          stmt3;
+		    	  break;
+		        default:
+		          stmt4;
+		    }
+		switch(변수)  변수값은 byte,short,int char 
+		              값이올수있다.(long 은안됨)
+*/
