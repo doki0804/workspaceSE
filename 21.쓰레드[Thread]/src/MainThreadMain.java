@@ -1,7 +1,7 @@
 /*
 쓰레드(thread)(실행흐름): 
    - 프로그램코드를 실행시키는 힘 
-   - 메인쓰레드,AWT 쓰레드,사용자정의 쓰레드
+   - 메인쓰레드,AWT 쓰레드(GUI쓰레드),사용자정의 쓰레드
    - 언제 만드냐--> 두가지일을 동시에 해야할때..
  
  
@@ -48,7 +48,8 @@ public class MainThreadMain {
 		Thread mainThread = Thread.currentThread();
 		System.out.println("main thread name : "+mainThread.getName());
 		System.out.println("main thread priority : "+mainThread.getPriority());
-		
+		MainThreadCalled mtc = new MainThreadCalled();
+		mtc.main_thread_called_method();
 		System.out.println("main thread end");
 		return;
 	}
