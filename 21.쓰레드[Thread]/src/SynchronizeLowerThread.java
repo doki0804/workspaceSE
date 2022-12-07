@@ -10,5 +10,4 @@ public class SynchronizeLowerThread extends Thread{
 		sharedObject.printLower();
 		
 	}
-
 }
