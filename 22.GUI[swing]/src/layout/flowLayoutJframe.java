@@ -38,23 +38,20 @@ public class flowLayoutJframe extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton btnNewButton_4 = new JButton("New button");
+		JButton btnNewButton_4 = new JButton("FIRST");
 		contentPane.add(btnNewButton_4);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("SECOND");
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton("THIRD");
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("FOURTH");
 		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("New button");
+		JButton btnNewButton_3 = new JButton("FIFTH");
 		contentPane.add(btnNewButton_3);
-		
-		JButton btnNewButton_5 = new JButton("New button");
-		contentPane.add(btnNewButton_5);
 	}
 
 }
