@@ -1,5 +1,5 @@
 
-package layout;
+package event;
 
 import java.awt.EventQueue;
 
@@ -18,7 +18,9 @@ import javax.swing.ImageIcon;
 public class ChattingFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField chatTF;
+	private JButton sendBtn;
+	private JTextArea chatTA;
 
 	/**
 	 * Launch the application.
@@ -63,16 +65,24 @@ public class ChattingFrame extends JFrame {
 		panel_1.setForeground(new Color(0, 0, 0));
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(30);
+		chatTF = new JTextField();
+		panel_1.add(chatTF);
+		chatTF.setColumns(30);
 		
-		JButton btnNewButton = new JButton("전송");
-		panel_1.add(btnNewButton);
+		sendBtn = new JButton("전송");
+		panel_1.add(sendBtn);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setText("맹구:안뇽\r\n짱구:울라울라");
-		contentPane.add(textArea, BorderLayout.CENTER);
+		chatTA = new JTextArea();
+		chatTA.setText("맹구:안뇽\r\n짱구:울라울라");
+		contentPane.add(chatTA, BorderLayout.CENTER);
+		/*
+		 * 이벤트소스에 이벤트핸들러객체등록
+		 */
+		ChatSendButtonActionEventHandler handler = new ChatSendButtonActionEventHandler();
+		sendBtn.addActionListener(handler);
+		
 	}
-
+	
+	
+	
 }
