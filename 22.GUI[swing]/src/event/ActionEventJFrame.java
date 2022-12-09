@@ -47,18 +47,38 @@ public class ActionEventJFrame extends JFrame{
 		westBtn=new JButton("이벤트쏘스[WEST]");
 		
 		/**********이벤트핸들러객체등록**********/
+		/**1.외부클래스**/
 		NorthButtonActionEventHandler handler = new NorthButtonActionEventHandler(this);
 		northBtn.addActionListener(handler);
+		/**2.멤버내부클래스**/
 		southBtn.addActionListener(new SouthBouttonActionEventHandler());
+		/**3.익명클래스**/
+		ActionListener westButtonHandler = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("west button click!!!");
+			}
+		};
+		westBtn.addActionListener(westButtonHandler);
+		
+		eastBtn.addActionListener(new ActionListener() {
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("east button click!!!");
+			}
+		});
 		
 		contentPane.add(northBtn,BorderLayout.NORTH);
 		contentPane.add(southBtn,BorderLayout.SOUTH);
-		/*
 		contentPane.add(eastBtn,BorderLayout.EAST);
 		contentPane.add(westBtn,BorderLayout.WEST);
-		*/
-		this.setSize(300, 400);
+		
+		this.setSize(500, 300);
 		this.setVisible(true);
+		
+		
 	}
 	public class SouthBouttonActionEventHandler implements ActionListener{
 		int count;
@@ -67,7 +87,7 @@ public class ActionEventJFrame extends JFrame{
 			count++;
 			
 			JButton source = (JButton)e.getSource();
-			source.setText("south button click["+count+"]");
+			source.setText("이벤트쏘스[south] click["+count+"]");
 			int r=(int)(Math.random()*256);
 			int g=(int)(Math.random()*256);
 			int b=(int)(Math.random()*256);

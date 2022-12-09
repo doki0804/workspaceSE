@@ -46,7 +46,14 @@ public class OuterComposingInnerClass {
 			}
 		};
 		childInterFace.local_inner_outer_access();
-
+		
+		Object oc = new Object() {
+			@Override
+			public String toString() {
+				return "난 재정의된 toString";
+			}
+		};
+		System.out.println(oc);
 	
 	}//end method
 	
