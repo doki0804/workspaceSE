@@ -12,6 +12,9 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -73,7 +76,7 @@ public class ChattingFrame extends JFrame {
 		panel_1.add(sendBtn);
 		
 		chatTA = new JTextArea();
-		chatTA.setText("맹구:안뇽\r\n짱구:울라울라");
+		chatTA.setText("맹구:안뇽\r\n짱구:울라울라\n");
 		contentPane.add(chatTA, BorderLayout.CENTER);
 		/*
 		 * 이벤트소스에 이벤트핸들러객체등록
@@ -81,8 +84,27 @@ public class ChattingFrame extends JFrame {
 		ChatSendButtonActionEventHandler handler = new ChatSendButtonActionEventHandler();
 		sendBtn.addActionListener(handler);
 		
+		
+	}//생성자
+	/**********Inner Class***********/
+	public class ChatSendButtonActionEventHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("send button click!!");
+			/*
+			 * frame의 Textfield와 TextArea에 접근해야함
+			 */
+			String chatStr = chatTF.getText();
+			chatTF.setText("");
+			chatTA.append(chatStr+"\n");
+			chatTF.requestFocus();
+			
+			
+		}
+
+		
 	}
-	
-	
+
 	
 }

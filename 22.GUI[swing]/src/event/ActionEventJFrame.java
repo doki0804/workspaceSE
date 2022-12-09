@@ -2,6 +2,8 @@ package event;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,9 +47,9 @@ public class ActionEventJFrame extends JFrame{
 		westBtn=new JButton("이벤트쏘스[WEST]");
 		
 		/**********이벤트핸들러객체등록**********/
-		northBtn.addActionListener(new NorthButtonActionEventHandler(this));
-		
-		
+		NorthButtonActionEventHandler handler = new NorthButtonActionEventHandler(this);
+		northBtn.addActionListener(handler);
+		southBtn.addActionListener(new SouthBouttonActionEventHandler());
 		
 		contentPane.add(northBtn,BorderLayout.NORTH);
 		contentPane.add(southBtn,BorderLayout.SOUTH);
@@ -57,6 +59,21 @@ public class ActionEventJFrame extends JFrame{
 		*/
 		this.setSize(300, 400);
 		this.setVisible(true);
+	}
+	public class SouthBouttonActionEventHandler implements ActionListener{
+		int count;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			count++;
+			
+			JButton source = (JButton)e.getSource();
+			source.setText("south button click["+count+"]");
+			int r=(int)(Math.random()*256);
+			int g=(int)(Math.random()*256);
+			int b=(int)(Math.random()*256);
+			contentPane.setBackground(new Color(r, g, b));
+		}
+		
 	}
 	
 	public static void main(String[] args) {

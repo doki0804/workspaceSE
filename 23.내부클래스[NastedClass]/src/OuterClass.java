@@ -15,6 +15,8 @@ public class OuterClass {
 		InnerClass ic = new InnerClass();
 		ic.inner_member_field=121212;
 		ic.inner_member_method();
+		System.out.println(ic);
+		System.out.println(ic.inner_member_field);
 	}
 	
 	
