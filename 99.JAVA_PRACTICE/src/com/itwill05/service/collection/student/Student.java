@@ -4,7 +4,7 @@ package com.itwill05.service.collection.student;
  * 성적처리를 위한 필요한 학생객체를 만들기 위한 클래스
  *  - 캡슐화
  */
-public class Student {
+public class Student implements Comparable<Student>{
 	/*
 	 * << 속성 >> 번호 이름 국어 영어 수학 총점 평균 평점 석차 
 	 * << 기능 >> 기본데이타입력,총점계산,평균계산,평점계산, 출력
@@ -165,6 +165,11 @@ public class Student {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	@Override
+	public int compareTo(Student nextStudent) {
+		return getTot()-nextStudent.getTot();
 	}
 	
 }

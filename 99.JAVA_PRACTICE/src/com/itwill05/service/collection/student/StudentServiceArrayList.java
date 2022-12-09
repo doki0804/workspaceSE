@@ -1,6 +1,7 @@
 package com.itwill05.service.collection.student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StudentServiceArrayList {
 
@@ -50,7 +51,13 @@ public class StudentServiceArrayList {
 	 * 2. 전체학생 총점으로 석차계산
 	 */
 	public void calculateRank() {
-
+		for(int i=0; i<studentList.size(); i++) {
+			for (int j =0; j<studentList.size(); j++) {
+				if(studentList.get(i).getTot()<studentList.get(j).getTot()) {
+					studentList.get(i).setRank(studentList.get(i).getRank()+1);
+				}
+			}
+		}
 	}
 
 	/*
@@ -65,7 +72,12 @@ public class StudentServiceArrayList {
 	 */
 	public Student findByStudent(int no) {
 		Student findStudent = null;
-
+		for (Student student : studentList) {
+			if(student.getNo()==no) {
+				findStudent = student;
+				break;
+			}
+		}
 		return findStudent;
 	}
 
@@ -74,7 +86,17 @@ public class StudentServiceArrayList {
 	 */
 	public ArrayList<Student> findByGrade(char grade) {
 		ArrayList<Student> findStudents = new ArrayList<Student>();
-
+		for (int i = 0; i < studentList.size(); i++) {
+			Student tempStudent = studentList.get(i);
+			tempStudent.calculateTotal();
+			tempStudent.calculateAvg();
+			tempStudent.calculateGrade();
+		}
+		for (Student student : studentList) {
+			if(student.getGrade()==grade) {
+				findStudents.add(student);
+			}
+		}
 		return findStudents;
 	}
 
@@ -83,7 +105,17 @@ public class StudentServiceArrayList {
 	 */
 	public ArrayList<Student> findByName(String name) {
 		ArrayList<Student> findStudents = new ArrayList<Student>();
-
+		for (int i = 0; i < studentList.size(); i++) {
+			Student tempStudent = studentList.get(i);
+			tempStudent.calculateTotal();
+			tempStudent.calculateAvg();
+			tempStudent.calculateGrade();
+		}
+		for (Student student : studentList) {
+			if(student.getName().equals(name)) {
+				findStudents.add(student);
+			}
+		}
 		return findStudents;
 	}
 
@@ -91,14 +123,14 @@ public class StudentServiceArrayList {
 	 * 7. 학생총점으로 오름차순정렬(X)
 	 */
 	public void sortByTotAsc() {
-
+		Collections.sort(studentList);
 	}
 
 	/*
 	 8. 학생이름순으로 오름차순정렬(X)
 	 */
 	public void sortByNameAsc() {
-
+		Collections.sort(studentList, new StudentNameAscComparator());
 	}
 
 }
