@@ -1,4 +1,4 @@
-package com.itwill05.service.account;
+package com.itwill05.service.array.account;
 
 /*
  * 1.계좌객체들(Account[]) 을멤버변수로가진다.

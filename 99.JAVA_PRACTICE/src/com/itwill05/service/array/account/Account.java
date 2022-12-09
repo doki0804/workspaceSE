@@ -1,4 +1,4 @@
-package com.itwill05.service.account;
+package com.itwill05.service.array.account;
 /*
  * 계좌객체를 생성하기위한 클래스
  */
