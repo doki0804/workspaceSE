@@ -45,15 +45,16 @@ public class ActionEventJFrame extends JFrame{
 		westBtn=new JButton("이벤트쏘스[WEST]");
 		
 		/**********이벤트핸들러객체등록**********/
-		northBtn.addActionListener(new NorthButtonActionEventHandler());
+		northBtn.addActionListener(new NorthButtonActionEventHandler(this));
 		
 		
 		
 		contentPane.add(northBtn,BorderLayout.NORTH);
 		contentPane.add(southBtn,BorderLayout.SOUTH);
+		/*
 		contentPane.add(eastBtn,BorderLayout.EAST);
 		contentPane.add(westBtn,BorderLayout.WEST);
-		
+		*/
 		this.setSize(300, 400);
 		this.setVisible(true);
 	}
