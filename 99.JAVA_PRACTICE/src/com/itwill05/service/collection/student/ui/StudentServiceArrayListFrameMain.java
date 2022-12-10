@@ -81,7 +81,7 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 				int no = Integer.parseInt(noTF.getText());
 				Student tempStudent = studentService.findByStudent(no);
 				if(tempStudent==null) {
-					System.out.println("없는번호입니다.");
+					System.out.println(no+ "은(는) 없는번호입니다. 다시 입력하세요.");
 				}else {
 					Student.headerPrint();
 					tempStudent.print();
@@ -99,9 +99,13 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 				System.out.println("5. 학점 입력하면 학생들 반환 ");
 				char grade = gradeTF.getText().charAt(0);
 				studentList = studentService.findByGrade(grade);
-				Student.headerPrint();
-				for (Student student : studentList) {
-					student.print();
+				if(studentList.size()==0) {
+					System.out.println(grade+"학점에 해당하는 학생이 없습니다.");
+				}else {
+					Student.headerPrint();
+					for (Student student : studentList) {
+						student.print();
+					}
 				}
 				
 			}
@@ -116,7 +120,7 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 				String name = nameTF.getText();
 				studentList = studentService.findByName(name);
 				if(studentList.size()==0) {
-					System.out.println("없는학생입니다.");
+					System.out.println(name + "은(는) 없는학생입니다. 다시 입력하세요.");
 				}else {
 					Student.headerPrint();
 					for (Student student : studentList) {
