@@ -64,7 +64,7 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 		findAllStudentsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("3. 전체학생반환출력");
-				studentList = new ArrayList<Student>(studentService.getStudentList());
+				studentList = studentService.getStudentList();
 				Student.headerPrint();
 				for (Student student : studentList) {
 					student.print();
@@ -79,9 +79,14 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("4.번호 입력하면 학생한명 반환  ");
 				int no = Integer.parseInt(noTF.getText());
-				Student tempStudent = studentService.findByStudent(no); 
-				Student.headerPrint();
-				tempStudent.print();
+				Student tempStudent = studentService.findByStudent(no);
+				if(tempStudent==null) {
+					System.out.println("없는번호입니다.");
+				}else {
+					Student.headerPrint();
+					tempStudent.print();
+				}
+				
 			}
 		});
 		
@@ -93,9 +98,9 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("5. 학점 입력하면 학생들 반환 ");
 				char grade = gradeTF.getText().charAt(0);
-				ArrayList<Student> tempStudents = studentService.findByGrade(grade);
+				studentList = studentService.findByGrade(grade);
 				Student.headerPrint();
-				for (Student student : tempStudents) {
+				for (Student student : studentList) {
 					student.print();
 				}
 				
@@ -109,19 +114,14 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("6.  이름KIM 인 학생들 반환 ");
 				String name = nameTF.getText();
-				
-				for (Student student : studentList) {
-					if(name.compareTo(student.getName())<0) {
-						System.out.println("없는학생입니다.");
-						break;
+				studentList = studentService.findByName(name);
+				if(studentList.size()==0) {
+					System.out.println("없는학생입니다.");
+				}else {
+					Student.headerPrint();
+					for (Student student : studentList) {
+						student.print();
 					}
-					break;
-				}
-				
-				ArrayList<Student> tempStudents = studentService.findByName(name);
-				Student.headerPrint();
-				for (Student student : tempStudents) {
-					student.print();
 				}
 			}
 		});
@@ -132,7 +132,12 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 		sortStudentByTotAscBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("7. 학생총점으로 오름차순정렬");
-				
+				studentService.sortByTotAsc();
+				studentList= studentService.getStudentList();
+				Student.headerPrint();
+				for (Student student : studentList) {
+					student.print();
+				}
 			}
 		});
 		sortStudentByTotAscBtn.setBounds(42, 369, 700, 40);
@@ -142,6 +147,12 @@ public class StudentServiceArrayListFrameMain  extends JFrame{
 		sortByNameStudentsAscBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("8. 학생이름순으로 오름차순정렬");
+				studentService.sortByNameAsc();
+				studentList = studentService.getStudentList();
+				Student.headerPrint();
+				for (Student student : studentList) {
+					student.print();
+				}
 			}
 		});
 		sortByNameStudentsAscBtn.setBounds(42, 424, 700, 41);
