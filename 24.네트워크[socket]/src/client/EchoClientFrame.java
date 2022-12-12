@@ -93,9 +93,9 @@ public class EchoClientFrame extends JFrame {
 					InputStream in = socket.getInputStream();
 					InputStreamReader isr = new InputStreamReader(in,"UTF-8");
 					BufferedReader br = new BufferedReader(isr);
-					String readLine = br.readLine();
-					displayTA.setText(echoStr);
-					System.out.println(echoStr);
+					String serverEchoStr = br.readLine();
+					displayTA.append(serverEchoStr+"\n");
+					System.out.println(serverEchoStr);
 					
 				}catch (Exception e1) {
 					System.out.println(e1.getMessage());
