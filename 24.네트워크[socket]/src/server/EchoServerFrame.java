@@ -89,6 +89,8 @@ public class EchoServerFrame extends JFrame {
 					PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),"UTF-8"));
 					out.println(clientMessage);
 					out.flush();
+					in.close();
+					out.close();
 					socket.close();
 				}
 				
