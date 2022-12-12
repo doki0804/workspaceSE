@@ -12,7 +12,7 @@ public class ClientSocketMain {
 		Socket socket = new Socket("www.naver.com", 80);
 		System.out.println(socket);
 		*/
-		Socket socket = new Socket("192.168.15.31", 3333);
+		Socket socket = new Socket("192.168.15.18", 3333);
 		System.out.println(socket);
 		InetAddress remoteAddress = socket.getInetAddress();
 		InetAddress localAddress = socket.getLocalAddress();

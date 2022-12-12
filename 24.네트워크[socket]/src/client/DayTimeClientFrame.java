@@ -60,7 +60,7 @@ public class DayTimeClientFrame extends JFrame {
 					/*
 					 * 1.Socket생성
 					 */
-					Socket socket = new Socket("192.168.15.31",8000);
+					Socket socket = new Socket("192.168.15.18",8000);
 					/*
 					 * 2.Socket으로부터 InputStream얻기
 					 */
@@ -90,6 +90,8 @@ public class DayTimeClientFrame extends JFrame {
 		timeDisplayLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		timeDisplayLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		contentPane.add(timeDisplayLabel, BorderLayout.CENTER);
+		
 	}
+	
 
 }
