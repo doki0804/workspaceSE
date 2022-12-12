@@ -74,7 +74,7 @@ public class EchoClientFrame extends JFrame {
 				/*
 				 * 1.Socket생성
 				 */
-					Socket socket = new Socket("192.168.15.31",9999);
+					Socket socket = new Socket("192.168.15.18",9999);
 				/*
 				 * 2.서버로문자데이타쓰기
 				 * 		- OutputStream 얻기
