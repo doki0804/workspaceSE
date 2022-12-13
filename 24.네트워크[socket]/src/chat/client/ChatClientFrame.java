@@ -117,6 +117,7 @@ public class ChatClientFrame extends JFrame {
 		/***********ClientClientThread객체생성***********/
 		client = new ClientClientThread();
 		client.start();
+		setTitle(client.getUserId()+"님 안녕하세요");
 	}//생성자
 
 	private void displayMessage(String msg) {

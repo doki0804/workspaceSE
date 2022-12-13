@@ -163,7 +163,7 @@ public class ChatServerFrame extends JFrame {
 				try {
 					clientService.removeClient(this); // 객체가 나가 읽을데이터가 사라지면 익셉션이되므로 객체 제거
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.err.println(e1.getMessage());
 				}
 			}
 
@@ -188,6 +188,7 @@ public class ChatServerFrame extends JFrame {
 		 */
 		public void addClient(ServerClientThread newClient) throws Exception {
 			clientList.add(newClient);
+			clientService.sendBroadcasting(newClient.getUserId()+"님 입장");
 			setLog("A.ServerClientService : "+newClient.getUserId()+"님 입장");
 			setLog("B.ServerClientService : 현재접속자수 "+clientList.size()+"명");
 		}
@@ -197,6 +198,7 @@ public class ChatServerFrame extends JFrame {
 		 */
 		public void removeClient(ServerClientThread removeClient) throws Exception {
 			clientList.remove(removeClient);
+			clientService.sendBroadcasting(removeClient.getUserId()+"님 퇴장");
 			setLog("A.ServerClientService : "+removeClient.getUserId()+"님 퇴장");
 			setLog("B.ServerClientService : 현재접속자수 "+clientList.size()+"명");
 		}
