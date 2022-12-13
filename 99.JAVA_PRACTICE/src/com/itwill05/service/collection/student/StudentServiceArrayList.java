@@ -118,6 +118,8 @@ public class StudentServiceArrayList {
 		}
 		return findStudents;
 	}
+	
+	
 
 	/*
 	 * 7. 학생총점으로 오름차순정렬(X)
