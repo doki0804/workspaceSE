@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import chat.common.ChatProtocol;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -25,6 +28,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 
 public class ChatClientFrame extends JFrame {
 
@@ -35,6 +41,8 @@ public class ChatClientFrame extends JFrame {
 	
 	/***********ClientClientThread**************/
 	private ClientClientThread client;
+	private JScrollPane westScrollPane;
+	private JList chatList;
 
 	/**
 	 * Launch the application.
@@ -114,6 +122,12 @@ public class ChatClientFrame extends JFrame {
 			}
 		});
 		panel.add(sendB);
+		
+		westScrollPane = new JScrollPane();
+		contentPane.add(westScrollPane, BorderLayout.WEST);
+		
+		chatList = new JList();
+		westScrollPane.setViewportView(chatList);
 		/***********ClientClientThread객체생성***********/
 		client = new ClientClientThread();
 		client.start();
@@ -162,18 +176,26 @@ public class ChatClientFrame extends JFrame {
 			while(true) {
 				try {
 					System.out.println("A.ClientClientThread: 서버로부터오는 데이타를 읽기위해 쓰레드 대기");
-					String receiveStr = in.readLine();
-					System.out.println("B.ClientClientThread: 서버로부터 읽은 데이타를 displayTA에 보여준다");
-					displayMessage(receiveStr);
+					
+					String chatStr = in.readLine();
+					String[] chatArray = chatStr.split("#");
+					System.out.println(chatArray[0]);
+					if(chatArray[0].equals(ChatProtocol.PLAIN_MSG)) {
+						System.out.println("B.ClientClientThread: 서버로부터 읽은 데이타를 displayTA에 보여준다");
+						displayMessage(chatArray[1]);
+					}else if(chatArray[0].equals(ChatProtocol.LIST_MSG)) {
+						System.out.println("C.ClientClientThread:서버로부터 읽은 LIST_MSG 데이타로 클라이언트 LIST갱신");
+						String[] idArray = chatArray[1].split("%");
+						DefaultListModel model = new DefaultListModel();
+						for (String id : idArray) {
+							model.addElement(id);
+						}
+						chatList.setModel(model);
+					}
 				} catch (IOException e) {
 					System.err.println(e.getMessage());
 				}
 			}
 		}
-		
-		
-		
 	}
-	
-
 }

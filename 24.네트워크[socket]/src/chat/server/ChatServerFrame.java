@@ -10,6 +10,9 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import chat.common.ChatProtocol;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -156,7 +159,7 @@ public class ChatServerFrame extends JFrame {
 					String readStr = in.readLine();
 					System.out.println("나.ServerClientThread : "+id+"로부터 읽은데이타 : " + readStr);
 					setLog("나.ServerClientThread : "+id+"로부터 읽은데이타 : " + readStr);
-					clientService.sendBroadcasting(readStr);
+					clientService.sendBroadcasting(ChatProtocol.PLAIN_MSG+"#"+readStr);
 					System.out.println("다.ServerClientThread : 연결된 모든 클라이턴트에 읽은데이타 전송");
 				}
 			} catch (Exception e) {
@@ -182,13 +185,22 @@ public class ChatServerFrame extends JFrame {
 		 * 클라이언트객체 보관리스트
 		 */
 		private List<ServerClientThread> clientList = new ArrayList<ServerClientThread>();
-		
+		private String makeClientList() {
+			String clientListStr="";
+			for (ServerClientThread serverClientThread : clientList) {
+				clientListStr += serverClientThread.getUserId()+"%";
+			}
+			clientListStr = clientListStr.substring(0,clientListStr.length());
+			return clientListStr;
+		}
 		/*
 		 * 클라이트객체추가
 		 */
 		public void addClient(ServerClientThread newClient) throws Exception {
 			clientList.add(newClient);
-			clientService.sendBroadcasting(newClient.getUserId()+"님 입장");
+			
+			clientService.sendBroadcasting(ChatProtocol.PLAIN_MSG+"#"+newClient.getUserId()+"님 입장");
+			clientService.sendBroadcasting(ChatProtocol.LIST_MSG+"#"+makeClientList());
 			setLog("A.ServerClientService : "+newClient.getUserId()+"님 입장");
 			setLog("B.ServerClientService : 현재접속자수 "+clientList.size()+"명");
 		}
@@ -198,7 +210,8 @@ public class ChatServerFrame extends JFrame {
 		 */
 		public void removeClient(ServerClientThread removeClient) throws Exception {
 			clientList.remove(removeClient);
-			clientService.sendBroadcasting(removeClient.getUserId()+"님 퇴장");
+			clientService.sendBroadcasting(ChatProtocol.PLAIN_MSG+"#"+removeClient.getUserId()+"님 퇴장");
+			clientService.sendBroadcasting(ChatProtocol.LIST_MSG+"#"+makeClientList());
 			setLog("A.ServerClientService : "+removeClient.getUserId()+"님 퇴장");
 			setLog("B.ServerClientService : 현재접속자수 "+clientList.size()+"명");
 		}
