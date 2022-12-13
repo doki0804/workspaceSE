@@ -31,6 +31,7 @@ import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 
 public class ChatClientFrame extends JFrame {
 
@@ -43,6 +44,7 @@ public class ChatClientFrame extends JFrame {
 	private ClientClientThread client;
 	private JScrollPane westScrollPane;
 	private JList chatList;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -110,7 +112,7 @@ public class ChatClientFrame extends JFrame {
 		});
 		chatTF.setHorizontalAlignment(SwingConstants.LEFT);
 		panel.add(chatTF);
-		chatTF.setColumns(38);
+		chatTF.setColumns(28);
 
 		JButton sendB = new JButton("\uC804\uC1A1");
 		sendB.addActionListener(new ActionListener() {
@@ -122,6 +124,9 @@ public class ChatClientFrame extends JFrame {
 			}
 		});
 		panel.add(sendB);
+		
+		comboBox = new JComboBox();
+		panel.add(comboBox);
 		
 		westScrollPane = new JScrollPane();
 		contentPane.add(westScrollPane, BorderLayout.WEST);
@@ -152,7 +157,7 @@ public class ChatClientFrame extends JFrame {
 		private PrintWriter out;
 		
 		public ClientClientThread() throws Exception {
-			this.socket = new Socket("192.168.15.31",8888);
+			this.socket = new Socket("192.168.15.18",8888);
 			this.id = socket.getLocalAddress().getHostAddress()+"["+socket.getLocalPort()+"]";
 			this.in = new BufferedReader(
 							new InputStreamReader(
@@ -161,6 +166,7 @@ public class ChatClientFrame extends JFrame {
 							new OutputStreamWriter(
 								socket.getOutputStream(),"UTF-8"));
 		}
+		
 		public String getUserId() {
 			return id;
 		}
