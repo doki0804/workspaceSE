@@ -127,6 +127,7 @@ public class ChatClientFrame extends JFrame {
 		contentPane.add(westScrollPane, BorderLayout.WEST);
 		
 		chatList = new JList();
+		
 		westScrollPane.setViewportView(chatList);
 		/***********ClientClientThread객체생성***********/
 		client = new ClientClientThread();
