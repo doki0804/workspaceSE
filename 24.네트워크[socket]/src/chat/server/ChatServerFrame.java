@@ -81,9 +81,9 @@ public class ChatServerFrame extends JFrame {
 			}
 		});
 		panel.add(noticeB);
-		/****ServerClientThread객체생성****/
+		/****접속된클라이언트객체를 보관할 ServerClientThread객체생성****/
 		clientService = new ServerClientService();
-		/****ChatServerThread start****/
+		/****클라이언트의 소켓연결요청을 처리 ChatServerThread start****/
 		new ChatServerThread().start();
 
 	}
@@ -108,7 +108,9 @@ public class ChatServerFrame extends JFrame {
 					Socket socket = serverSocket.accept();
 					setLog("2.ChatServerThread:접속클라이언트"+socket);
 					ServerClientThread client = new ServerClientThread(socket);
+					client.start(); // 서버클라이언트쓰레드객체 쓰레드 시작
 					clientService.addClient(client);
+					setLog("3.clientService 객체에 serverClientThread객체추가 쓰레드 start");
 					
 				}
 			} catch (Exception e) {
@@ -136,6 +138,10 @@ public class ChatServerFrame extends JFrame {
 			this.out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(),"UTF-8"));
 			
 		}
+		public void send(String msg) {
+			out.println(msg);
+			out.flush();
+		}
 		
 		public String getUserId() {
 			return id;
@@ -145,10 +151,20 @@ public class ChatServerFrame extends JFrame {
 		public void run() {
 			try {
 				while (true) {
-					System.out.println("가.ServerClientThread: 로부터 데이타를 읽기위해 쓰레드대기");
-					System.out.println("나.ServerClientThread: 로부터 읽은데이타:");
+					System.out.println("가.ServerClientThread : "+id+"로부터 데이타를 읽기위해 쓰레드대기");
+					setLog("가.ServerClientThread : "+id+"로부터 데이타를 읽기위해 쓰레드대기");
+					String readStr = in.readLine();
+					System.out.println("나.ServerClientThread : "+id+"로부터 읽은데이타 : " + readStr);
+					setLog("나.ServerClientThread : "+id+"로부터 읽은데이타 : " + readStr);
+					clientService.sendBroadcasting(readStr);
+					System.out.println("다.ServerClientThread : 연결된 모든 클라이턴트에 읽은데이타 전송");
 				}
 			} catch (Exception e) {
+				try {
+					clientService.removeClient(this); // 객체가 나가 읽을데이터가 사라지면 익셉션이되므로 객체 제거
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 
 		}
@@ -188,8 +204,10 @@ public class ChatServerFrame extends JFrame {
 		/*
 		 *모든클라이언트에 메세지전송
 		 */
-		public void sendBroadcasting() throws Exception {
-			
+		public void sendBroadcasting(String msg) throws Exception {
+			for (ServerClientThread serverClientThread : clientList) {
+				serverClientThread.send(msg);
+			}
 		}
 	}
 }
