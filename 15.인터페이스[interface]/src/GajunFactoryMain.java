@@ -22,8 +22,7 @@ public class GajunFactoryMain {
 		 */
 		GajunOnOff[] gajunArray = {tv1,tv2,tv3,audio1,audio2,phone1,phone2}; 
 		/*
-		   for
-		 * (GajunOnOff gajunTest : gajunArray) {
+		   for(GajunOnOff gajunTest : gajunArray) {
 		 * System.out.println("----------검사시작-----------"); gajunTest.on(); GajunVolume
 		 * tempGajun=(GajunVolume)gajunTest; tempGajun.volumeUp();
 		 * tempGajun.volumeDown(); gajunTest.off();
