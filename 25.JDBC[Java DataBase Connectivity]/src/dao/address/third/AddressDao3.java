@@ -9,13 +9,17 @@ public class AddressDao3 {
 
 	public AddressDao3() {
 	}
-	public void insert(String name,String phone,String address) throws Exception{
+	public void insert(Address newAddress) throws Exception{
 		String driverClass="oracle.jdbc.OracleDriver";
 		String url="jdbc:oracle:thin:@localhost:1521:xe";
 		String user="scott";
 		String password="tiger";
 		
-		String insertSQL = "insert into address values(address_no_SEQ.nextval,'"+name+"','"+phone+"','"+address+"')";
+		String insertSQL = 
+				"insert into address values(address_no_SEQ.nextval,'"
+						+newAddress.getName()+"','"
+						+newAddress.getPhone()+"','"
+						+newAddress.getAddress()+"')";
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
@@ -24,13 +28,17 @@ public class AddressDao3 {
 		stmt.close();
 		con.close();
 	}
-	public void update(int no,String name,String phone,String address) throws Exception{
+	public void update(Address newAddress) throws Exception{
 		String driverClass="oracle.jdbc.OracleDriver";
 		String url="jdbc:oracle:thin:@localhost:1521:xe";
 		String user="scott";
 		String password="tiger";
 		
-		String updateSQL = "update address set name = '"+name+"',phone='"+phone+"',address='"+address+"' where no=2";
+		String updateSQL = "update address set name = '"
+						+ newAddress.getName()+"',"
+						+ "phone='"+newAddress.getPhone()+"',"
+						+ "address='"+newAddress.getAddress()+"'"
+						+ "where no="+newAddress.getNo();
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
@@ -40,13 +48,13 @@ public class AddressDao3 {
 		stmt.close();
 		con.close();
 	}
-	public void delete(int no) throws Exception{
+	public void delete(Address newAddress) throws Exception{
 		String driverClass="oracle.jdbc.OracleDriver";
 		String url="jdbc:oracle:thin:@localhost:1521:xe";
 		String user="scott";
 		String password="tiger";
 		
-		String deleteSQL = "delete address where no="+no;
+		String deleteSQL = "delete address where no="+newAddress.getNo();
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
@@ -56,20 +64,20 @@ public class AddressDao3 {
 		stmt.close();
 		con.close();
 	}
-	public void findByPrimaryKey(int no) throws Exception{
+	public void findByPrimaryKey(Address newAddress) throws Exception{
 		String driverClass="oracle.jdbc.OracleDriver";
 		String url="jdbc:oracle:thin:@localhost:1521:xe";
 		String user="scott";
 		String password="tiger";
 		
-		String selectSQL = "select no,name,phone,address from address where no="+no;
+		String selectSQL = "select no,name,phone,address from address where no="+newAddress.getNo();
 		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
 		Statement stmt = con.createStatement();	
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		if(rs.next()) {
-			int n = rs.getInt("no");
+			int no = rs.getInt("no");
 			String name = rs.getString("name");
 			String phone = rs.getString("phone");
 			String address = rs.getString("address");

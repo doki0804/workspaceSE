@@ -9,13 +9,14 @@ public class AddressDao3TestMain {
 		 */
 		AddressDao3 addressDao3 = new AddressDao3();
 		System.out.println("1.insert");
-		addressDao3.insert("이소라","343-9090","경기도민");
+		Address newAddress = new Address(0,"홍진경","111-3333","대구시민");
+		addressDao3.insert(newAddress);
 		System.out.println("2.update");
-		addressDao3.update(16,"삼소라", "888-8888", "대전시 중구");
+		addressDao3.update(new Address(10,"김변경","000-0000","주소변경"));
 		System.out.println("3.delete");
-		addressDao3.delete(16);
+		addressDao3.delete(new Address(16,"","",""));
 		System.out.println("4.findByPrimaryKey");
-		addressDao3.findByPrimaryKey(10);
+		addressDao3.findByPrimaryKey(new Address(10,"","",""));
 		System.out.println("5.findAll");
 		addressDao3.findAll();
 	}
