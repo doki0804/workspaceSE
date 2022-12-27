@@ -12,7 +12,7 @@ public class AddressTableInsertMain {
 		String user="scott";
 		String password="tiger";
 		
-		String insertSQL = "insert into address values(address_no_SEQ.nextval,'김경호','123-4567','경기도 성남시')";
+		String insertSQL = "insert into address values(address_no_SEQ.nextval,'김강산','123-4567','경기도 성남시')";
 		/*
 		 1.Driver class loading
 	     2.Connection 객체생성
@@ -24,8 +24,19 @@ public class AddressTableInsertMain {
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
-		
 		int rowCount = stmt.executeUpdate(insertSQL);
+		/*
+		 Statement를 사용한 SQL문의 전송
+		 
+		 int executeUpdate(String sql) throws SQLException
+		 	 - Executes the given SQL statement, which may be an INSERT, UPDATE, or DELETE statement
+		 	   or an SQL statement that returns nothing, such as an SQL DDL statement.
+		 Note:This method cannot be called on a PreparedStatement or CallableStatement.
+		 Parameters: sql - an SQL Data Manipulation Language (DML) statement, such as INSERT, UPDATE or DELETE
+		 or an SQL statement that returns nothing, such as a DDL statement.
+		 Returns: either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing
+		 */
+		
 		System.out.println(">>insert row count:"+rowCount+" 행 insert");
 		stmt.close();
 		con.close();
