@@ -69,7 +69,7 @@ public class JDBCFlow {
 			System.out.println(deptno+"\t"+dname+"\t"+loc);
 		}
 		System.out.println("--------------------------");
-				
+		
 		/*
 		 * 6.연결객체해지(resource해지)
 		 */
@@ -77,11 +77,6 @@ public class JDBCFlow {
 		stmt.close();
 		con.close();
 		System.out.println("6.연결객체닫기");
-		
-		
-		
-		
-		
 		
 		
 	}

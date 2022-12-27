@@ -9,7 +9,5 @@ CREATE TABLE address(
 
 DROP SEQUENCE address_no_SEQ;
 
-CREATE SEQUENCE address_no_SEQ NOMAXVALUE NOCACHE NOORDER NOCYCLE;
+CREATE SEQUENCE address_no_SEQ start with 1 nocycle nocache;
 desc address;
-
-
