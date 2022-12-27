@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class AddressDao2 {
+public class AddressDao3 {
 
-	public AddressDao2() {
+	public AddressDao3() {
 	}
 	public void insert(String name,String phone,String address) throws Exception{
 		String driverClass="oracle.jdbc.OracleDriver";

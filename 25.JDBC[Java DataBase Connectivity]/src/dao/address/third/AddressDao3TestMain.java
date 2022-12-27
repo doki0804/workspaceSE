@@ -1,13 +1,13 @@
 package dao.address.third;
 
-public class AddressDao2TestMain {
+public class AddressDao3TestMain {
 
 	public static void main(String[] args) throws Exception {
 		/*
 		 * AddressDao2TestMain에서
 		 * AddressDao2로 파라메타를 전달
 		 */
-		AddressDao2 addressDao2 = new AddressDao2();
+		AddressDao3 addressDao2 = new AddressDao3();
 		System.out.println("1.insert");
 		addressDao2.insert("이소라","343-9090","경기도민");
 		System.out.println("2.update");
