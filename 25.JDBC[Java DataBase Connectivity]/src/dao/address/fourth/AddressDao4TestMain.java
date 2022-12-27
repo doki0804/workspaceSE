@@ -35,9 +35,7 @@ public class AddressDao4TestMain {
 		
 		System.out.println("5.findAll");
 		List<Address> addressList = addressDao4.findAll();
-		for (Address address : addressList) {
-			System.out.println(">> "+address);
-		}
+		System.out.println(">> "+addressList);
 	}
 
 }
