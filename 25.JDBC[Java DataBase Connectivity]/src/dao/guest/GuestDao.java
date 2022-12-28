@@ -76,10 +76,10 @@ public class GuestDao {
 		String password="jdeveloper18";
 		/********************************************************************/
 		
-		String deleteSql = "delete from guest where guest_no = ?";
-		
 		Class.forName(driverClass);
 		Connection con = DriverManager.getConnection(url, user, password);
+		
+		String deleteSql = "delete from guest where guest_no=?";
 		PreparedStatement pstmt = con.prepareStatement(deleteSql);
 		pstmt.setInt(1, guest_no);
 		int rowCount = pstmt.executeUpdate();
@@ -104,15 +104,16 @@ public class GuestDao {
 		pstmt.setInt(1, guest_no);
 		ResultSet rs = pstmt.executeQuery();
 		Guest tempGuest = null;
-		if(rs!=null) {
-			tempGuest = new Guest(rs.getInt(0),
-					rs.getString(1),
-					rs.getDate(2),
-					rs.getString(3),
-					rs.getString(4),
-					rs.getString(5),
-					rs.getString(6)
+		if(rs.next()) {
+			tempGuest = new Guest(rs.getInt("guest_no"),
+					rs.getString("guest_name"),
+					rs.getDate("guest_date"),
+					rs.getString("guest_email"),
+					rs.getString("guest_homepage"),
+					rs.getString("guest_title"),
+					rs.getString("guest_content")
 					);
+		}else {
 		}
 		rs.close();
 		pstmt.close();
@@ -138,13 +139,13 @@ public class GuestDao {
 		List<Guest> guest = new ArrayList<Guest>(); 
 		if(rs.next()) {
 			do {
-				guest.add(new Guest(rs.getInt(0),
-						rs.getString(1),
-						rs.getDate(2),
-						rs.getString(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6)
+				guest.add(new Guest(rs.getInt("guest_no"),
+						rs.getString("guest_name"),
+						rs.getDate("guest_date"),
+						rs.getString("guest_email"),
+						rs.getString("guest_homepage"),
+						rs.getString("guest_title"),
+						rs.getString("guest_content")
 						));
 			} while (rs.next());
 		}
