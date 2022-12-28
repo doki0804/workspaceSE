@@ -1,0 +1,17 @@
+0. 테이블설계(create drop) 					-->address_table_create_drop.sql 파일생성
+
+1. sql문작성(insert,update,delete,select)	-->addresss_insert_update_delete_select.sql 파일생성
+
+2. Dto(VO)클래스작성
+
+3. Dao클래스작성
+ 	- 테이블에 insert,delete,update,findByPk,selectAll 단위메쏘드만들기
+    - 단위메쏘드(인자 반환타입정의)생성
+    
+4.<<< 반드시 테스트 되어야합니다.>>>
+	public class AddressDaoTestMain{
+		public static void main(String[] args){
+		  AdderessDao adderssDao=new AdderessDao();
+		  adderssDao.insert();
+		} 
+	}    
