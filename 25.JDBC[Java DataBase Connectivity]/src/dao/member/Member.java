@@ -24,7 +24,7 @@ public class Member {
 	private String m_password;
 	private String m_name;
 	private String m_address;
-	private int age;
+	private int m_age;
 	private String m_married;
 	private Date m_regdate;
 	
@@ -39,7 +39,7 @@ public class Member {
 		this.m_password = m_password;
 		this.m_name = m_name;
 		this.m_address = m_address;
-		this.age = age;
+		this.m_age = age;
 		this.m_married = m_married;
 		this.m_regdate = m_regdate;
 	}
@@ -60,8 +60,8 @@ public class Member {
 		return m_address;
 	}
 
-	public int getAge() {
-		return age;
+	public int getM_age() {
+		return m_age;
 	}
 
 	public String getM_married() {
@@ -88,8 +88,8 @@ public class Member {
 		this.m_address = m_address;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setM_age(int age) {
+		this.m_age = age;
 	}
 
 	public void setM_married(String m_married) {
@@ -103,7 +103,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [m_id=" + m_id + ", m_password=" + m_password + ", m_name=" + m_name + ", m_address=" + m_address
-				+ ", age=" + age + ", m_married=" + m_married + ", m_regdate=" + m_regdate + "]"+"\n";
+				+ ", age=" + m_age + ", m_married=" + m_married + ", m_regdate=" + m_regdate + "]"+"\n";
 	}
 	
 	

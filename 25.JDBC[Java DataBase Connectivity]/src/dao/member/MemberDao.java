@@ -31,12 +31,13 @@ public class MemberDao {
 							+newMember.getM_password()+"','"
 							+newMember.getM_name()+"','"
 							+newMember.getM_address()+"','"
-							+newMember.getM_married()+"','"
-							+newMember.getM_regdate()
-							+"')"; 
+							+newMember.getM_age()+"','"
+							+newMember.getM_married()+"',"
+							+"sysdate"
+							+")"; 
 		
 		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(insertSQL);
 		stmt.close();
@@ -52,15 +53,17 @@ public class MemberDao {
 		String user="jdeveloper18";
 		String password="jdeveloper18";
 		
-		String updateSQL = "update member set m_password = '"+updateMember.getM_password()+","
-							+"m_name = "+updateMember.getM_name()+"',"
-							+"m_address ="+updateMember.getM_address()+"',"
-							+"m_married = "+updateMember.getM_married()+"',"
-							+"m_regDate = "+updateMember.getM_regdate()+"'"
-							+"where m_id = "+updateMember.getM_id(); 
+		String updateSQL = 	"update member set m_id='"+
+				updateMember.getM_id()+"',"
+				+"m_password='"+updateMember.getM_password()+"',"
+				+"m_name='"+updateMember.getM_name()+"',"
+				+"m_address='"+updateMember.getM_address()+"',"
+				+"m_age='"+updateMember.getM_age()+"',"
+				+"m_married='"+updateMember.getM_married()+"'"
+				+"where m_id="+"'"+updateMember.getM_id()+"'";
 		
 		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(updateSQL);
 		stmt.close();
@@ -74,10 +77,10 @@ public class MemberDao {
 		String user="jdeveloper18";
 		String password="jdeveloper18";
 		
-		String deleteSQL = "delete member where m_id = "+deleteMember.getM_id(); 
+		String deleteSQL = "delete member where m_id = '"+deleteMember.getM_id()+"'"; 
 		
 		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
 		int rowCount = stmt.executeUpdate(deleteSQL);
 		stmt.close();
@@ -91,10 +94,10 @@ public class MemberDao {
 		String user="jdeveloper18";
 		String password="jdeveloper18";
 		
-		String selectSQL = "select * from member where m_id = "+findMember.getM_id(); 
+		String selectSQL = "select * from member where m_id = '"+findMember.getM_id()+"'"; 
 		
 		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		Member tempMember = new Member();
@@ -121,10 +124,10 @@ public class MemberDao {
 		String user="jdeveloper18";
 		String password="jdeveloper18";
 		
-		String selectSQL = "'select * from member'"; 
+		String selectSQL = "select * from member"; 
 		
 		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url);
+		Connection con = DriverManager.getConnection(url,user,password);
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(selectSQL);
 		List<Member> members = new ArrayList<Member>();
