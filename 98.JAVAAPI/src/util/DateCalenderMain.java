@@ -107,11 +107,23 @@ public class DateCalenderMain {
 		System.out.println("day :"+gapMillisec/1000/60/60/24);
 		
 		System.out.println("----------java.util.Date-->java.sql.Date----------");
+		java.util.Date utilDate1 = new java.util.Date();
+		java.util.Date utilDate2 = new java.util.Date(System.currentTimeMillis());
+		
+		java.sql.Date sqlDate1 = new java.sql.Date(utilDate1.getTime());
+		java.sql.Date sqlDate2 = new java.sql.Date(utilDate2.getTime());
+		
+		System.out.println("sqlDate1:"+sqlDate1);
+		System.out.println("sqlDate2:"+sqlDate2);
+		
 		System.out.println("----------java.sql.Date-->java.util.Date----------");
+		java.sql.Date sqlDate3 = new java.sql.Date(System.currentTimeMillis());
+		java.sql.Date sqlDate4 = java.sql.Date.valueOf("2022-12-31");
 		
-		
-		
-		
+		java.util.Date utilDate3 = sqlDate3;
+		java.util.Date utilDate4 = sqlDate4;
+		System.out.println("sqlDate3:"+utilDate3);
+		System.out.println("sqlDate4:"+utilDate4);
 	}
 
 }
