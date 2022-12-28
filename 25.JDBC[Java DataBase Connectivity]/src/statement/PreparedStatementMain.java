@@ -3,6 +3,7 @@ package statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /*
@@ -149,15 +150,30 @@ public class PreparedStatementMain {
 		
 		/****************9004 insert******************/
 		empno = 9004;
-		ename = null;
-		job = null;
-		mgr = 7369;
-		hiredate = null;
-		sal = 5682.89;
-		comm = 30;
-		deptno = 40;
+		//ename = null;
+		//job = null;
+		//mgr = null;
+		//hiredate = null;
+		//sal = null;
+		//comm = null;
+		//deptno = null;
 		
 		String insertSql4 = "insert into emp values(?,?,?,?,?,?,?,?)";
+		
+		PreparedStatement pstmt4 = con.prepareStatement(insertSql4);
+		pstmt4.setInt(1, empno);
+		pstmt4.setNull(2, Types.VARCHAR);
+		pstmt4.setNull(3, Types.VARCHAR);
+		pstmt4.setNull(4, Types.INTEGER	);
+		pstmt4.setNull(5, Types.DATE);
+		pstmt4.setNull(6, Types.DOUBLE);
+		pstmt4.setNull(7, Types.INTEGER	);
+		pstmt4.setNull(8, Types.INTEGER	);
+		pstmt4.executeUpdate();
+		System.out.println(">> PreparedStatement 9004-->"+rowCount+"행 insert");
+		
+		pstmt4.close();
+		con.close();
 		
 		
 		
