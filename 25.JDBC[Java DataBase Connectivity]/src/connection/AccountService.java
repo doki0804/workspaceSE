@@ -91,6 +91,7 @@ public class AccountService {
 			 *   - 리소스해지
 			 */
 			try {
+				pstmt.close();
 				dataSource.close(con);
 			} catch (Exception e) {
 				e.printStackTrace();
