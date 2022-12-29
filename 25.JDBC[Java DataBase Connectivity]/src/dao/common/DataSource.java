@@ -12,9 +12,9 @@ import java.sql.SQLException;
 public class DataSource {
 	/************데이터베이스접속정보**************/
 	String driverClass="oracle.jdbc.OracleDriver";
-	String url="jdbc:oracle:thin:@localhost:1521:xe";
-	String user="scott";
-	String password="tiger";
+	String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
+	String user="jdeveloper18";
+	String password="jdeveloper18";
 	/**********************************************/
 	/*
 	 * Connection 객체를 생성해서 반환하는 메쏘드
