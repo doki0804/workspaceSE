@@ -27,8 +27,7 @@ public class DataSource {
 	/*
 	 * Connection 객체를 close하는 메쏘드
 	 */
-	public Connection close(Connection con) throws Exception{
+	public void close(Connection con) throws Exception{
 		con.close();
-		return con;
 	}
 }
