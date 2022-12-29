@@ -23,10 +23,9 @@ public class AddressDao {
 	}
 	
 	public int insert(Address newAddress) throws Exception{
-		String insertSQL = "insert into address values(address_no_SEQ.nextval,?,?,?)";
 		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(insertSQL);
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_INSERT);
 		pstmt.setString(1, newAddress.getName());
 		pstmt.setString(2, newAddress.getPhone());
 		pstmt.setString(3, newAddress.getAddress());
@@ -37,10 +36,9 @@ public class AddressDao {
 	}
 	
 	public int update(Address newAddress) throws Exception{
-		String updateSQL = "update address set name = ?, phone = ?, address = ? where no = ?";
 		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(updateSQL);
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_UPDATE);
 		pstmt.setString(1, newAddress.getName());
 		pstmt.setString(2, newAddress.getPhone());
 		pstmt.setString(3, newAddress.getAddress());
@@ -51,10 +49,9 @@ public class AddressDao {
 		return rowCount;
 	}
 	public int delete(Address newAddress) throws Exception{
-		String deleteSQL = "delete address where no= ?";
 		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(deleteSQL);
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_DELETE);
 		pstmt.setInt(1, newAddress.getNo());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
@@ -62,11 +59,10 @@ public class AddressDao {
 		return rowCount;
 	}
 	public Address findByPrimaryKey(Address newAddress) throws Exception{
-		String selectSQL = "select no,name,phone,address from address where no=?";
-		Address findAddress = null;
 		
+		Address findAddress = null;
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_SELECTE_BY_NO);
 		pstmt.setInt(1, newAddress.getNo());
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
@@ -83,12 +79,10 @@ public class AddressDao {
 	}
 	public List<Address> findAll() throws Exception{
 		
-		String selectSQL = "select no,name,phone,address from address";
-		
 		List<Address> addressList = new ArrayList<Address>();
 		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(selectSQL);	
+		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_SELECTE_BY_ALL);	
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
 			do{
