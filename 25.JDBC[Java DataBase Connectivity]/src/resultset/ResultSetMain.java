@@ -70,7 +70,17 @@ public class ResultSetMain {
 		rs.close();
 		
 		System.out.println("---------------ResultSet.getString(\"컬럼이름\")---------------");
+		rs=pstmt.executeQuery();
 		
+		while(rs.next()) {
+			String noStr = rs.getString("no");
+			String name = rs.getString("name");
+			String short_desc = rs.getString("short_desc");
+			String price = rs.getString("price");
+			String ipgo_date = rs.getString("ipgo_date");
+			System.out.println(noStr+"\t"+name+"\t"+short_desc+"\t"+price+"\t"+ipgo_date);
+		}
+		rs.close();
 		
 		
 		
