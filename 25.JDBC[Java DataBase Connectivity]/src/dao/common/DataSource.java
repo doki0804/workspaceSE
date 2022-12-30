@@ -14,10 +14,10 @@ import java.util.Properties;
  */
 public class DataSource {
 	/************데이터베이스접속정보**************/
-	String driverClass;
-	String url;
-	String user;
-	String password;
+	private String driverClass;
+	private String url;
+	private String user;
+	private String password;
 	/**********************************************/
 	public DataSource() throws IOException {
 		/**********jdbc.properties를 읽어서 데이터베이스접속정보를 필드에 저장 ***********/
