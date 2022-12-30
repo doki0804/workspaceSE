@@ -18,14 +18,13 @@ public class DataSource {
 	String url;
 	String user;
 	String password;
-	/**
-	 * @throws IOException ********************************************/
+	/**********************************************/
 	public DataSource() throws IOException {
 		/**********jdbc.properties를 읽어서 데이터베이스접속정보를 필드에 저장 ***********/
 		Properties properties = new Properties();
 		InputStream propertiesInput = DataSource.class.getResourceAsStream("/jdbc.properties");
 		properties.load(propertiesInput);
-		this.driverClass = properties.getProperty("DriverClass");
+		this.driverClass = properties.getProperty("driverClass");
 		this.url = properties.getProperty("url");
 		this.user = properties.getProperty("user");
 		this.password = properties.getProperty("password");
