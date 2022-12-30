@@ -24,6 +24,8 @@ public class EmpDaoTestMain {
 					tempRowMap.get("DNAME")+"\t"+
 					tempRowMap.get("LOC"));
 		}
+		System.out.println("-------------find_primary_key_Dept2--------------");
+		System.out.println(empDao.findByPrimaryKey2(7369));
 
 		
 		

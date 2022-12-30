@@ -85,6 +85,26 @@ public class EmpDao {
 		
 	}
 	
-	
+	public Emp findByPrimaryKey2(int empno) throws Exception {
+		Emp findEmp = new Emp();
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(EmpSQL.SELECT_BY_EMPNO_EMP_DEPT);
+		pstmt.setInt(1, empno);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			findEmp.setEmpno(rs.getInt("empno"));
+			findEmp.setEname(rs.getString("ename"));
+		
+			findEmp.setDept(new Dept(rs.getInt("empno"), null, rs.getString("dname"), null));
+			findEmp.setDept(new Dept(rs.getInt("empno"),null,null,rs.getString("loc")));
+			
+		}
+		rs.close();
+		pstmt.close();
+		dataSource.close(con);
+		
+		return findEmp;
+	}
 	
 }

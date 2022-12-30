@@ -1,5 +1,6 @@
 package dao.guest;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,24 +8,19 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuestDao {
+import dao.common.DataSource;
 
-	public GuestDao() {
+public class GuestDao {
+	
+	private DataSource dataSource;
+	
+	public GuestDao() throws Exception {
+		dataSource = new DataSource();
 	}
 	
 	public int insert(Guest newguest) throws Exception {
-		/********************************************************************/
-		String driverClass="oracle.jdbc.OracleDriver";
-		String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user="jdeveloper18";
-		String password="jdeveloper18";
-		/********************************************************************/
-		
-		String insertSql = "insert into guest values(guest_guest_no_seq.nextval,?,?,?,?,?,?)";
-		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
-		PreparedStatement pstmt = con.prepareStatement(insertSql);
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.INTSERT_SQL);
 		pstmt.setString(1, newguest.getGuest_name());
 		pstmt.setDate(2, new java.sql.Date(newguest.getGuest_date().getTime()));
 		pstmt.setString(3, newguest.getGuest_email());
@@ -33,28 +29,13 @@ public class GuestDao {
 		pstmt.setString(6, newguest.getGuest_content());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
-		con.close();
+		dataSource.close(con);
 		return rowCount;
 	}
 	
 	public int update(Guest updateGuest) throws Exception {
-		/********************************************************************/
-		String driverClass="oracle.jdbc.OracleDriver";
-		String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user="jdeveloper18";
-		String password="jdeveloper18";
-		/********************************************************************/
-		
-		String updateSql = "update guest set guest_name=?,"
-				+ "guest_date=?,"
-				+ "guest_email=?,"
-				+ "guest_homepage=?,"
-				+ "guest_title=?,"
-				+ "guest_content=? where guest_no=?";
-		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
-		PreparedStatement pstmt = con.prepareStatement(updateSql);
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.UPDATE_SQL);
 		pstmt.setString(1, updateGuest.getGuest_name());
 		pstmt.setDate(2, new java.sql.Date(updateGuest.getGuest_date().getTime()));
 		pstmt.setString(3, updateGuest.getGuest_email());
@@ -64,44 +45,24 @@ public class GuestDao {
 		pstmt.setInt(7, updateGuest.getGuest_no());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
-		con.close();
+		dataSource.close(con);
 		return rowCount;
 	}
 	
-	public int delete(int guest_no) throws Exception {
-		/********************************************************************/
-		String driverClass="oracle.jdbc.OracleDriver";
-		String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user="jdeveloper18";
-		String password="jdeveloper18";
-		/********************************************************************/
-		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
-		
-		String deleteSql = "delete from guest where guest_no=?";
-		PreparedStatement pstmt = con.prepareStatement(deleteSql);
-		pstmt.setInt(1, guest_no);
+	public int delete(Guest deleteGuest) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.DELETE_SQL);
+		pstmt.setInt(1, deleteGuest.getGuest_no());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
-		con.close();
+		dataSource.close(con);
 		return rowCount;
 	}
 	
-	public Guest findByPrimaryKey(int guest_no) throws Exception {
-		/********************************************************************/
-		String driverClass="oracle.jdbc.OracleDriver";
-		String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user="jdeveloper18";
-		String password="jdeveloper18";
-		/********************************************************************/
-		
-		String selectSql = "select * from guest where guest_no = ?";
-		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
-		PreparedStatement pstmt = con.prepareStatement(selectSql);
-		pstmt.setInt(1, guest_no);
+	public Guest findByPrimaryKey(Guest findGuest) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.SELECT_BY_FIND_PRIMARY_KEY_SQL);
+		pstmt.setInt(1, findGuest.getGuest_no());
 		ResultSet rs = pstmt.executeQuery();
 		Guest tempGuest = null;
 		if(rs.next()) {
@@ -117,24 +78,14 @@ public class GuestDao {
 		}
 		rs.close();
 		pstmt.close();
-		con.close();
+		dataSource.close(con);
 		
 		return tempGuest;
 	}
 	
 	public List<Guest> findAll() throws Exception {
-		/********************************************************************/
-		String driverClass="oracle.jdbc.OracleDriver";
-		String url="jdbc:oracle:thin:@182.237.126.19:1521:xe";
-		String user="jdeveloper18";
-		String password="jdeveloper18";
-		/********************************************************************/
-		
-		String selectSql = "select * from guest";
-		
-		Class.forName(driverClass);
-		Connection con = DriverManager.getConnection(url, user, password);
-		PreparedStatement pstmt = con.prepareStatement(selectSql);
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(GuestSQL.SELECT_BY_FIND_ALL_SQL);
 		ResultSet rs = pstmt.executeQuery();
 		List<Guest> guest = new ArrayList<Guest>(); 
 		if(rs.next()) {
@@ -151,7 +102,7 @@ public class GuestDao {
 		}
 		rs.close();
 		pstmt.close();
-		con.close();
+		dataSource.close(con);
 		
 		return guest;
 	}

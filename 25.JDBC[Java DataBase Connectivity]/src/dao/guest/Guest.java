@@ -24,6 +24,9 @@ public class Guest {
 	
 	public Guest() {
 	}
+	public Guest(int guest_no) {
+		this.guest_no=guest_no;
+	}
 	
 	public Guest(int guest_no, String guest_name, Date guest_date, String guest_email, String guest_homepage,
 			String guest_title, String guest_content) {
