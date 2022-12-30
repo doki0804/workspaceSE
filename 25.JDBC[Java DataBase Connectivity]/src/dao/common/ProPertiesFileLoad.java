@@ -23,7 +23,7 @@ public class ProPertiesFileLoad {
 		FileInputStream fis2 = new FileInputStream(System.getProperty("java.class.path")+"\\jdbc.properties");
 		System.out.println(fis2);
 		*/
-		InputStream fis3 = DataSource.class.getResourceAsStream("\\jdbc.properties");
+		InputStream fis3 = DataSource.class.getResourceAsStream("/jdbc.properties");
 		System.out.println(fis3);
 		
 		properties.load(fis3);

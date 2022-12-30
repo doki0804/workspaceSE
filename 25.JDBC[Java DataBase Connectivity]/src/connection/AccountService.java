@@ -1,5 +1,6 @@
 package connection;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,7 +9,7 @@ import dao.common.DataSource;
 
 public class AccountService {
 	private DataSource dataSource;
-	public AccountService() {
+	public AccountService() throws Exception {
 		dataSource = new DataSource();
 	}
 	/*

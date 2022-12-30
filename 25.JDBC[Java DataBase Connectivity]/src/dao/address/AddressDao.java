@@ -1,5 +1,6 @@
 package dao.address;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class AddressDao {
 	 */
 	private DataSource dataSource;
 	
-	public AddressDao() {
+	public AddressDao() throws Exception {
 		/*
 		 * dataSource멤버필드 초기화
 		 */
