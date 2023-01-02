@@ -96,8 +96,7 @@ public class EmpDao {
 			findEmp.setEmpno(rs.getInt("empno"));
 			findEmp.setEname(rs.getString("ename"));
 		
-			findEmp.setDept(new Dept(rs.getInt("empno"), null, rs.getString("dname"), null));
-			findEmp.setDept(new Dept(rs.getInt("empno"),null,null,rs.getString("loc")));
+			findEmp.setDept(new Dept(rs.getInt("empno"), null, rs.getString("dname"), rs.getString("loc")));
 			
 		}
 		rs.close();

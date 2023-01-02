@@ -25,7 +25,7 @@ public class Emp {
 	public Emp() {
 	}
 
-	public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, Dept deptNo) {
+	public Emp(int empno, String ename, String job, int mgr, Date hiredate, double sal, double comm, Dept dept) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
@@ -34,7 +34,7 @@ public class Emp {
 		this.hiredate = hiredate;
 		this.sal = sal;
 		this.comm = comm;
-		this.dept = deptNo;
+		this.dept = dept;
 	}
 
 	public int getEmpno() {
