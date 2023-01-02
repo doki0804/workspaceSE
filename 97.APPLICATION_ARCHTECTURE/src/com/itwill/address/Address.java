@@ -21,6 +21,9 @@ public class Address {
 
 	public Address() {
 	}
+	public Address(int no) {
+		this.no = no;
+	}
 	public Address(int no, String name, String phone, String address) {
 		super();
 		this.no = no;

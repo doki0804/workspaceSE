@@ -51,29 +51,29 @@ public class AddressDao {
 		dataSource.close(con);
 		return rowCount;
 	}
-	public int delete(Address newAddress) throws Exception{
+	public int delete(int no) throws Exception{
 		
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_DELETE);
-		pstmt.setInt(1, newAddress.getNo());
+		pstmt.setInt(1, no);
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
 		return rowCount;
 	}
-	public Address findByPrimaryKey(Address newAddress) throws Exception{
+	public Address findByPrimaryKey(int no) throws Exception{
 		
 		Address findAddress = null;
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(AddressSQL.ADDRESS_SELECTE_BY_NO);
-		pstmt.setInt(1, newAddress.getNo());
+		pstmt.setInt(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
-			int no = rs.getInt("no");
+			int no1 = rs.getInt("no");
 			String name = rs.getString("name");
 			String phone = rs.getString("phone");
 			String address = rs.getString("address");
-			findAddress = new Address(no,name,phone,address);
+			findAddress = new Address(no1,name,phone,address);
 		}
 		rs.close();
 		pstmt.close();

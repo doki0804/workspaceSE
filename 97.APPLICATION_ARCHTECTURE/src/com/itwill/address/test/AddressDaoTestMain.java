@@ -22,19 +22,19 @@ public class AddressDaoTestMain {
 		rowCount = addressDao.update(new Address(10,"김변경","000-0000","주소변경"));
 		System.out.println(">> update rowCount : "+rowCount);
 		System.out.println("3.delete");
-		rowCount = addressDao.delete(new Address(16,"","",""));
+		rowCount = addressDao.delete(16);
 		System.out.println(">> delete rowCount : "+rowCount);
 		System.out.println("4.findByPrimaryKey");
 		
-		Address findAddress = addressDao.findByPrimaryKey(new Address(10,"","",""));
+		Address findAddress = addressDao.findByPrimaryKey(10);
 		if (findAddress!=null) {
 			System.out.println(">> "+findAddress);
 		}else {
 			System.out.println(">> 조건에 만족하는 주소록 존재안함"+findAddress);
 		}
-		System.out.println(addressDao.findByPrimaryKey(new Address(1,"","","")));
-		System.out.println(addressDao.findByPrimaryKey(new Address(2,"","","")));
-		System.out.println(addressDao.findByPrimaryKey(new Address(3,"","","")));
+		System.out.println(addressDao.findByPrimaryKey(1));
+		System.out.println(addressDao.findByPrimaryKey(2));
+		System.out.println(addressDao.findByPrimaryKey(3));
 		
 		System.out.println("5.findAll");
 		List<Address> addressList = addressDao.findAll();

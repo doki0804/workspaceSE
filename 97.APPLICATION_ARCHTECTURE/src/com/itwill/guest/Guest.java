@@ -24,9 +24,6 @@ public class Guest {
 	
 	public Guest() {
 	}
-	public Guest(int guest_no) {
-		this.guest_no=guest_no;
-	}
 	
 	public Guest(int guest_no, String guest_name, Date guest_date, String guest_email, String guest_homepage,
 			String guest_title, String guest_content) {
@@ -100,7 +97,7 @@ public class Guest {
 	public String toString() {
 		return "Guest [guest_no=" + guest_no + ", guest_name=" + guest_name + ", guest_date=" + guest_date
 				+ ", guest_email=" + guest_email + ", guest_homepage=" + guest_homepage + ", guest_title=" + guest_title
-				+ ", guest_content=" + guest_content + "]";
+				+ ", guest_content=" + guest_content + "]\n";
 	}
 	
 	

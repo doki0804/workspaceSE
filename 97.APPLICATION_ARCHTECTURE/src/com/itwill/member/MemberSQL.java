@@ -1,7 +1,7 @@
 package com.itwill.member;
 
 public class MemberSQL {
-	public final static String INTSERT_SQL = "insert into member values(?,?,?,?,?,?,?)";
+	public final static String INTSERT_SQL = "insert into member values(?,?,?,?,?,?,sysdate)";
 	public final static String UPDATE_SQL = "update member set m_id= ?,"
 											+ "m_password=?,m_name = ?,m_address=?,m_age=?,"
 											+ "m_married=? where m_id= ?";

@@ -17,14 +17,21 @@ public class AddressService {
 	/*
 	 * 주소록 번호로 1개보기
 	 */
-	public Address addressDetail(Address findAddress) throws Exception {
-		return addressDao.findByPrimaryKey(findAddress);
+	public Address addressDetail(int no) throws Exception {
+		return addressDao.findByPrimaryKey(no);
 	}
+	/*
+	 * 주소록 번호로 1개로 수정
+	 */
+	public int addressUpdate(Address updateAddress) throws Exception {
+		return addressDao.update(updateAddress);
+	}
+	
 	/*
 	 * 주소록 번호로 삭제하기
 	 */
-	public int addressDelete(Address deleteAddress) throws Exception {
-		return addressDao.delete(deleteAddress);
+	public int addressDelete(int no) throws Exception {
+		return addressDao.delete(no);
 	}
 	/*
 	 * 주소록 전체보기

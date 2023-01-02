@@ -1,7 +1,10 @@
-package com.itwill.guest;
+package com.itwill.guest.test;
 
 import java.util.Date;
 import java.util.List;
+
+import com.itwill.guest.Guest;
+import com.itwill.guest.GuestDao;
 
 public class GuestDaoTestMain {
 
@@ -20,7 +23,7 @@ public class GuestDaoTestMain {
 						"방명록사용법",
 						"방명록처럼 사용하시면됩니다."));
 		System.out.println("1.insert >>"+rowCount+"개 행 insert 완료");
-		rowCount = guestDao.delete(new Guest(1));
+		rowCount = guestDao.delete(1);
 		System.out.println("2.delete >>"+rowCount+"개 행 delete 완료");
 		rowCount = guestDao.update(
 				new Guest(2,
@@ -31,7 +34,7 @@ public class GuestDaoTestMain {
 						"변경사용법",
 						"변경록처럼 변경하시면됩니다."));
 		System.out.println("3.update >>"+rowCount+"개 행 update 완료");
-		Guest findGuest = guestDao.findByPrimaryKey(new Guest(2));
+		Guest findGuest = guestDao.findByPrimaryKey(2);
 		System.out.println("4.findByPrimarykey >>"+findGuest);
 		
 		List<Guest> guestList = guestDao.findAll();

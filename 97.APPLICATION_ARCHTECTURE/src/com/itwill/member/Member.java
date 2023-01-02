@@ -32,9 +32,6 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String m_id) {
-		this.m_id = m_id;
-	}
 	public Member(String m_id, String m_password, String m_name, String m_address, int age, String m_married,
 			Date m_regdate) {
 		super();

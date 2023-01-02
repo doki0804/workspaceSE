@@ -34,7 +34,6 @@ public class MemberDao {
 		pstmt.setString(4, newMember.getM_address());
 		pstmt.setInt(5, newMember.getM_age());
 		pstmt.setString(6, newMember.getM_married());
-		pstmt.setDate(7, new java.sql.Date(newMember.getM_regdate().getTime()));
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
@@ -59,20 +58,20 @@ public class MemberDao {
 		return rowCount;
 	}
 
-	public int delete(Member deleteMember) throws Exception {
+	public int delete(String m_id) throws Exception {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.DELETE_SQL);
-		pstmt.setString(1,deleteMember.getM_id());
+		pstmt.setString(1,m_id);
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		dataSource.close(con);
 		return rowCount;
 	}
 
-	public Member findByPrimaryKey(Member findMember) throws Exception {
+	public Member findByPrimaryKey(String m_id) throws Exception {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.SELECT_BY_FIND_PRIMARY_KEY_SQL);
-		pstmt.setString(1,findMember.getM_id());
+		pstmt.setString(1,m_id);
 		ResultSet rs = pstmt.executeQuery();
 		Member tempMember = new Member();
 		if(rs.next()) {
