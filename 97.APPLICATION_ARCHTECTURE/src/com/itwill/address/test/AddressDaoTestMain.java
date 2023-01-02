@@ -1,7 +1,10 @@
-package com.itwill.address;
+package com.itwill.address.test;
 
 import java.util.Iterator;
 import java.util.List;
+
+import com.itwill.address.Address;
+import com.itwill.address.AddressDao;
 
 public class AddressDaoTestMain {
 

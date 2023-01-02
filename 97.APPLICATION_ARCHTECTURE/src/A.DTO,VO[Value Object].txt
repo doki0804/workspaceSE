@@ -1,0 +1,8 @@
+
+/*
+VO(Value Object),DTO(Data Transfer Object)
+  	- XX관리를 위하여 필요한 도메인클래스(VO,DTO)
+  	- XX객체 한명의 데이타를가지고있다.(VO)
+  	- XX객체 한명의 데이타를 저장하기위한멤버변수를 가지고있다
+  	- XX 테이블과 동일한 속성을 멤버필드로가지는 객체
+ */
