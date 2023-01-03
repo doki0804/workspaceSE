@@ -25,6 +25,32 @@ public class MemberServiceTestMain {
 			JOptionPane.showMessageDialog(null, "중복된아이디입니다.");
 		}
 		
+		int loginResult = memberService.login("xxxx", "xxxx");
+		if(loginResult==1) {
+			JOptionPane.showMessageDialog(null, "일치하는 아이디가 없습니다.");
+		}else if(loginResult==2) {
+			JOptionPane.showMessageDialog(null, "비밀번호가 틀립니다.");
+		}else if(loginResult==0) {
+			System.out.println("메인화면으로 이동");
+		}
+		System.out.println(">> "+memberService.login("aaaa", "2323"));
+		System.out.println(">> "+memberService.login("pppp", "2323"));
 		
+		/*
+		 * 회원상세보기
+		 */
+		System.out.println("회원정보 : " + memberService.memberDetail("cccc"));
+		
+		/*
+		 * 회원정보수정
+		 */
+		int update = memberService.memberUpdate(new Member("", "", "", "", 0, "", null));
+		
+		/*
+		 * 중복아이디 체크
+		 */
+		System.out.println("3.duplicateId");
+		System.out.println(">> "+memberService.isDuplicateId("aaaa"));
+		System.out.println(">> "+memberService.isDuplicateId("bbbb"));
 	}
 }
