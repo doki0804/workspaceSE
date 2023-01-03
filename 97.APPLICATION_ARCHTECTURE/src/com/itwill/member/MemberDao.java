@@ -73,7 +73,7 @@ public class MemberDao {
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.SELECT_BY_FIND_PRIMARY_KEY_SQL);
 		pstmt.setString(1,m_id);
 		ResultSet rs = pstmt.executeQuery();
-		Member tempMember = new Member();
+		Member tempMember = null;
 		if(rs.next()) {
 			tempMember = new Member(rs.getString("m_id"),
 									rs.getString("m_password"),
@@ -82,8 +82,6 @@ public class MemberDao {
 									rs.getInt("m_age"),
 									rs.getString("m_married"),
 									rs.getDate("m_regdate"));
-		}else {
-			tempMember = null;
 		}
 		rs.close();
 		pstmt.close();
