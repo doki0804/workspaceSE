@@ -29,6 +29,11 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class MemberMainFrame extends JFrame {
 	/********1.MemberService멤버필드선언*********/
@@ -62,6 +67,7 @@ public class MemberMainFrame extends JFrame {
 	private JMenuItem loginMenuItem;
 	private JButton updateFormBTN;
 	private JButton updateCkBTN;
+	private JTable memberListTB;
 
 	/**
 	 * Launch the application.
@@ -86,7 +92,7 @@ public class MemberMainFrame extends JFrame {
 	public MemberMainFrame() throws Exception {
 		setTitle("회원관리");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 369, 510);
+		setBounds(100, 100, 461, 558);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -339,6 +345,7 @@ public class MemberMainFrame extends JFrame {
 		JPanel memberInfoPanel = new JPanel();
 		memberInfoPanel.setBackground(Color.LIGHT_GRAY);
 		memberTabbedPane.addTab("회원정보", null, memberInfoPanel, null);
+		memberTabbedPane.setEnabledAt(3, false);
 		memberInfoPanel.setLayout(null);
 		
 		updateFormBTN = new JButton("수정폼");
@@ -452,6 +459,50 @@ public class MemberMainFrame extends JFrame {
 		updateCkBTN.setBounds(186, 323, 105, 23);
 		memberInfoPanel.add(updateCkBTN);
 		
+		JPanel memberAdminPanel = new JPanel();
+		memberTabbedPane.addTab("회원관리", null, memberAdminPanel, null);
+		memberAdminPanel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 31, 406, 108);
+		memberAdminPanel.add(scrollPane);
+		
+		memberListTB = new JTable();
+		memberListTB.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null},
+			},
+			new String[] {
+				"\uC544\uC774\uB514", "\uD328\uC2A4\uC6CC\uB4DC", "\uC774\uB984", "\uC8FC\uC18C", "\uB098\uC774", "\uACB0\uD63C\uC5EC\uBD80", "\uB4F1\uB85D\uC77C"
+			}
+		));
+		scrollPane.setViewportView(memberListTB);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"김경호", "김경미", "김경양"}));
+		comboBox.setBounds(235, 200, 85, 23);
+		memberAdminPanel.add(comboBox);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 202, 141, 161);
+		memberAdminPanel.add(scrollPane_1);
+		
+		JList list = new JList();
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"김경미", "김경우", "김경양", "김경가", "김경나", "김경다", "김경라", "김경마", "김경바", "김경사", "김경아"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		scrollPane_1.setViewportView(list);
+		
 		/********2.MemberService멤버필드객체생성*********/
 		memberService = new MemberService();
 		
@@ -554,6 +605,4 @@ public class MemberMainFrame extends JFrame {
 			
 		}
 	}
-	
-	
 }
