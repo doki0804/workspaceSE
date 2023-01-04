@@ -162,7 +162,7 @@ public class MemberMainFrame extends JFrame {
 			}
 		});
 		memberMainLB.setHorizontalAlignment(SwingConstants.CENTER);
-		memberMainLB.setIcon(new ImageIcon("C:\\01.JAVA_DEVELOPER\\01.JAVA_FUNDMENTAL\\image\\album.jpg"));
+		memberMainLB.setIcon(new ImageIcon(MemberMainFrame.class.getResource("/images/album.jpg")));
 		memberMainPanel.add(memberMainLB, BorderLayout.CENTER);
 		
 		JPanel memberLoginPanel = new JPanel();
