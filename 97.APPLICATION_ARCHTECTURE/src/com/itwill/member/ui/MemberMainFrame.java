@@ -57,7 +57,11 @@ public class MemberMainFrame extends JFrame {
 	private JTabbedPane memberTabbedPane;
 	private JComboBox info_ageCB;
 	private JCheckBox info_marriedCK;
+	private JMenuItem logoutMenuItem;
+	private JMenuItem joinMenuItem;
 	private JMenuItem loginMenuItem;
+	private JButton updateFormBTN;
+	private JButton updateCkBTN;
 
 	/**
 	 * Launch the application.
@@ -91,18 +95,39 @@ public class MemberMainFrame extends JFrame {
 		menuBar.add(memberMenu);
 		
 		loginMenuItem = new JMenuItem("로그인");
+		loginMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			memberTabbedPane.setSelectedIndex(1);
+			}
+		});
 		memberMenu.add(loginMenuItem);
 		
-		JMenuItem joinMenuItem_2 = new JMenuItem("가입");
-		memberMenu.add(joinMenuItem_2);
+		joinMenuItem = new JMenuItem("가입");
+		joinMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			memberTabbedPane.setSelectedIndex(2);
+			}
+		});
+		memberMenu.add(joinMenuItem);
 		
-		JMenuItem logoutMenuItem_1 = new JMenuItem("로그아웃");
-		memberMenu.add(logoutMenuItem_1);
+		logoutMenuItem = new JMenuItem("로그아웃");
+		logoutMenuItem.setEnabled(false);
+		logoutMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logoutProcess();
+			}
+		});
+		memberMenu.add(logoutMenuItem);
 		
 		JSeparator separator = new JSeparator();
 		memberMenu.add(separator);
 		
 		JMenuItem exitMenuItem_3 = new JMenuItem("종료");
+		exitMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		memberMenu.add(exitMenuItem_3);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -123,6 +148,7 @@ public class MemberMainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(loginMember==null) {
 					memberTabbedPane.setSelectedIndex(1);
+					login_idTF.requestFocus();
 				}else {
 					memberTabbedPane.setSelectedIndex(3);
 					
@@ -168,6 +194,8 @@ public class MemberMainFrame extends JFrame {
 					if(result==0) {
 						//로그인성공
 						loginProcess(id);
+						login_idTF.setText("");
+						login_pwTF.setText("");
 											
 					}else {
 						JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 틀립니다.");
@@ -313,9 +341,21 @@ public class MemberMainFrame extends JFrame {
 		memberTabbedPane.addTab("회원정보", null, memberInfoPanel, null);
 		memberInfoPanel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(149, 323, 97, 23);
-		memberInfoPanel.add(btnNewButton);
+		updateFormBTN = new JButton("수정폼");
+		updateFormBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String btnText = updateFormBTN.getText();
+				if(btnText.equals("수정폼")) {
+					updateFormEnabled(true);
+				
+				}else if(btnText.equals("수정취소")){
+					displayMemberInfo(loginMember);
+					updateFormEnabled(false);
+				}
+			}
+		});
+		updateFormBTN.setBounds(59, 323, 105, 23);
+		memberInfoPanel.add(updateFormBTN);
 		
 		JLabel 아이디_1 = new JLabel("아이디");
 		아이디_1.setBounds(94, 106, 57, 15);
@@ -341,7 +381,6 @@ public class MemberMainFrame extends JFrame {
 		memberInfoPanel.add(이름_1);
 		
 		info_nameTF = new JTextField();
-		info_nameTF.setEditable(false);
 		info_nameTF.setColumns(10);
 		info_nameTF.setBounds(153, 165, 116, 21);
 		memberInfoPanel.add(info_nameTF);
@@ -351,7 +390,6 @@ public class MemberMainFrame extends JFrame {
 		memberInfoPanel.add(주소_1);
 		
 		info_addressTF = new JTextField();
-		info_addressTF.setEditable(false);
 		info_addressTF.setColumns(10);
 		info_addressTF.setBounds(153, 196, 116, 21);
 		memberInfoPanel.add(info_addressTF);
@@ -361,6 +399,7 @@ public class MemberMainFrame extends JFrame {
 		memberInfoPanel.add(lblNewLabel_1_1_1_1_2);
 		
 		info_ageCB = new JComboBox();
+		info_ageCB.setEditable(true);
 		info_ageCB.setModel(new DefaultComboBoxModel(new String[] {"20", "21", "22", "23", "24"}));
 		info_ageCB.setBackground(Color.WHITE);
 		info_ageCB.setBounds(153, 226, 116, 23);
@@ -371,9 +410,47 @@ public class MemberMainFrame extends JFrame {
 		memberInfoPanel.add(lblNewLabel_1_1_1_1_1_1);
 		
 		info_marriedCK = new JCheckBox("");
-		info_marriedCK.setEnabled(false);
 		info_marriedCK.setBounds(154, 257, 21, 23);
 		memberInfoPanel.add(info_marriedCK);
+		
+		updateCkBTN = new JButton("등록");
+		updateCkBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					/************TextField로 부터 데이타 얻기*************/
+					String id = info_idTF.getText();
+					String pw = new String(info_pwTF.getPassword());
+					String name = info_nameTF.getText();
+					String address = info_addressTF.getText();
+					
+					/******유효성체크******/
+					if(id.equals("")) {
+						idMsgLB.setText("아이디를 입력하세요.");
+						idTF.requestFocus();
+						return;
+					}
+					String ageStr = (String)info_ageCB.getSelectedItem();
+					//if(ageStr.equals("나이를 선택하세요")){
+					//}
+					int age = Integer.parseInt(ageStr);
+					String married = "";
+					if(info_marriedCK.isSelected()) {
+						married = "T";
+					}else {
+						married = "F";
+					}
+					
+					Member Member = new Member(id,pw,name,address,age,married,null);
+					memberService.memberUpdate(Member);
+					loginMember = memberService.memberDetail(id);
+					updateFormEnabled(false);
+				}catch (Exception e1) {
+					
+				}
+			}
+		});
+		updateCkBTN.setBounds(186, 323, 105, 23);
+		memberInfoPanel.add(updateCkBTN);
 		
 		/********2.MemberService멤버필드객체생성*********/
 		memberService = new MemberService();
@@ -381,6 +458,32 @@ public class MemberMainFrame extends JFrame {
 		
 	}//생성자 끝
 	
+	/*************로그아웃시    호출할 메쏘드***************/
+	private void logoutProcess() {
+		/**********로그인성공시 해야할일***********
+		 1.로그인 성공한 맴버객체 초기화
+		 2.로그인,회원가입탭 활성화 회원정보 불활성화
+		   메뉴아이템(로그아웃) 불활성화,메뉴아이템(로그인,가입) 활성화
+		 3.MemberMainFrame타이틀 변경
+		 4.메인화면으로 화면전환
+		 ******************************************/
+		//1.로그인 성공한 맴버객체 초기화
+		this.loginMember = null;
+		//2.로그인,회원가입탭 활성화 회원정보 불활성화
+		memberTabbedPane.setEnabledAt(1, true);
+		memberTabbedPane.setEnabledAt(2, true);
+		memberTabbedPane.setEnabledAt(3, false);
+		loginMenuItem.setEnabled(true);
+		joinMenuItem.setEnabled(true);
+		logoutMenuItem.setEnabled(false);
+		//3.MemberMainFrame타이틀 변경
+		setTitle("회원관리");
+		//4.메인화면으로 화면전환
+		memberTabbedPane.setSelectedIndex(0);
+		
+		
+	}
+	/*************로그인 성공시 호출할 메쏘드***************/
 	private void loginProcess(String id) throws Exception {
 		/**********로그인성공시 해야할일***********
 		 1.로그인 성공한 맴버객체 멤버필드에 저장
@@ -397,11 +500,15 @@ public class MemberMainFrame extends JFrame {
 		//3.로그인화면,회원가입화면 불활성화
 		memberTabbedPane.setEnabledAt(1, false);
 		memberTabbedPane.setEnabledAt(2, false);
+		memberTabbedPane.setEnabledAt(3, true);
+		loginMenuItem.setEnabled(false);
+		joinMenuItem.setEnabled(false);
+		logoutMenuItem.setEnabled(true);
 		
-		//4.회원정보보기화면
+		//4.회원정보보기화면 전환
 		memberTabbedPane.setSelectedIndex(3);
 		displayMemberInfo(this.loginMember);
-		
+		updateFormEnabled(false);
 		
 	}
 	
@@ -418,6 +525,35 @@ public class MemberMainFrame extends JFrame {
 		}else {
 			info_marriedCK.setSelected(false);
 		}
-		
 	}
+	
+	/*********** 회원수정폼 활성화 불활성화 *************/
+	private void updateFormEnabled(boolean b) {
+		if(b) {
+			//활성화
+			//info_idTF.setEnabled(true);
+			//info_pwTF.setEnabled(true);
+			info_nameTF.setEnabled(true);
+			info_addressTF.setEnabled(true);
+			info_ageCB.setEnabled(true);
+			info_marriedCK.setEnabled(true);
+			
+			updateFormBTN.setText("수정취소");
+			updateCkBTN.setEnabled(true);
+			
+		}else {
+			//불활성화
+			info_idTF.setEnabled(false);
+			info_pwTF.setEnabled(false);
+			info_nameTF.setEnabled(false);
+			info_addressTF.setEnabled(false);
+			info_ageCB.setEnabled(false);
+			info_marriedCK.setEnabled(false);
+			updateFormBTN.setText("수정폼");
+			updateCkBTN.setEnabled(false);
+			
+		}
+	}
+	
+	
 }
