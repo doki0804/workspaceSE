@@ -25,6 +25,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MemberMainFrame extends JFrame {
 	/********1.MemberService멤버필드선언*********/
@@ -78,7 +82,7 @@ public class MemberMainFrame extends JFrame {
 	public MemberMainFrame() throws Exception {
 		setTitle("회원관리");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 447, 542);
+		setBounds(100, 100, 369, 510);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -108,6 +112,26 @@ public class MemberMainFrame extends JFrame {
 		
 		memberTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(memberTabbedPane, BorderLayout.CENTER);
+		
+		JPanel memberMainPanel = new JPanel();
+		memberTabbedPane.addTab("회원메인", null, memberMainPanel, null);
+		memberMainPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel memberMainLB = new JLabel("");
+		memberMainLB.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(loginMember==null) {
+					memberTabbedPane.setSelectedIndex(1);
+				}else {
+					memberTabbedPane.setSelectedIndex(3);
+					
+				}
+			}
+		});
+		memberMainLB.setHorizontalAlignment(SwingConstants.CENTER);
+		memberMainLB.setIcon(new ImageIcon("C:\\01.JAVA_DEVELOPER\\01.JAVA_FUNDMENTAL\\image\\album.jpg"));
+		memberMainPanel.add(memberMainLB, BorderLayout.CENTER);
 		
 		JPanel memberLoginPanel = new JPanel();
 		memberLoginPanel.setBackground(Color.PINK);
@@ -163,7 +187,7 @@ public class MemberMainFrame extends JFrame {
 		JButton joinBtn = new JButton("회원가입");
 		joinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				memberTabbedPane.setSelectedIndex(1);
+				memberTabbedPane.setSelectedIndex(2);
 			}
 		});
 		joinBtn.setBounds(224, 282, 97, 23);
@@ -259,7 +283,7 @@ public class MemberMainFrame extends JFrame {
 					boolean isAdd = memberService.addMember(newMember);
 					if(isAdd) {
 						//로그인 화면전환
-						memberTabbedPane.setSelectedIndex(0);
+						memberTabbedPane.setSelectedIndex(1);
 					}else {
 						JOptionPane.showMessageDialog(null, "이미 사용하고있는 아이디입니다.");
 						idTF.requestFocus();
@@ -337,6 +361,7 @@ public class MemberMainFrame extends JFrame {
 		memberInfoPanel.add(lblNewLabel_1_1_1_1_2);
 		
 		info_ageCB = new JComboBox();
+		info_ageCB.setModel(new DefaultComboBoxModel(new String[] {"20", "21", "22", "23", "24"}));
 		info_ageCB.setBackground(Color.WHITE);
 		info_ageCB.setBounds(153, 226, 116, 23);
 		memberInfoPanel.add(info_ageCB);
@@ -370,23 +395,29 @@ public class MemberMainFrame extends JFrame {
 		setTitle(id+"님 로그인");
 		
 		//3.로그인화면,회원가입화면 불활성화
-		memberTabbedPane.setEnabledAt(0, false);
 		memberTabbedPane.setEnabledAt(1, false);
+		memberTabbedPane.setEnabledAt(2, false);
 		
 		//4.회원정보보기화면
-		memberTabbedPane.setSelectedIndex(2);
+		memberTabbedPane.setSelectedIndex(3);
+		displayMemberInfo(this.loginMember);
 		
-		/*****회원상세데이터보여주기*****/
-		info_idTF.setText(loginMember.getM_id());
-		info_pwTF.setText(loginMember.getM_password());
-		info_nameTF.setText(loginMember.getM_name());
-		info_addressTF.setText(loginMember.getM_address());
-		
-		//info_ageCB.setS
 		
 	}
 	
-	private void infoProcess() {
+	private void displayMemberInfo(Member member) {
+		
+		/*****회원상세데이터보여주기*****/
+		info_idTF.setText(member.getM_id());
+		info_pwTF.setText(member.getM_password());
+		info_nameTF.setText(member.getM_name());
+		info_addressTF.setText(member.getM_address());
+		info_ageCB.setSelectedItem(member.getM_age()+"");
+		if(member.getM_married().equals("T")) {
+			info_marriedCK.setSelected(true);
+		}else {
+			info_marriedCK.setSelected(false);
+		}
 		
 	}
 }
