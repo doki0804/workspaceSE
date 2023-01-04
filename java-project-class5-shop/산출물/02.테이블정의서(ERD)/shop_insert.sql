@@ -25,3 +25,4 @@ insert into cart(cart_no,cart_qty,userid,p_no)
     values(cart_cart_no_SEQ.nextval,3,'guard2',2);
 insert into cart(cart_no,cart_qty,userid,p_no)
     values(cart_cart_no_SEQ.nextval,2,'guard2',7);
+    
