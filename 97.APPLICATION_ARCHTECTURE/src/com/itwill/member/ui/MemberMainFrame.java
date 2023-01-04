@@ -29,11 +29,17 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MemberMainFrame extends JFrame {
 	/********1.MemberService멤버필드선언*********/
@@ -44,6 +50,8 @@ public class MemberMainFrame extends JFrame {
 	 */
 	/***************************/
 	private Member loginMember=null;
+	
+	private int selected_index = 0;
 	
 	private JPanel contentPane;
 	private JTextField idTF;
@@ -68,6 +76,7 @@ public class MemberMainFrame extends JFrame {
 	private JButton updateFormBTN;
 	private JButton updateCkBTN;
 	private JTable memberListTB;
+	private JButton memberDeleteBTN;
 
 	/**
 	 * Launch the application.
@@ -142,6 +151,14 @@ public class MemberMainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		memberTabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		memberTabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int selectedTabIndex = memberTabbedPane.getSelectedIndex();
+				if(selectedTabIndex==4) {
+					displayMemberList();
+				}
+			}
+		});
 		contentPane.add(memberTabbedPane, BorderLayout.CENTER);
 		
 		JPanel memberMainPanel = new JPanel();
@@ -468,27 +485,24 @@ public class MemberMainFrame extends JFrame {
 		memberAdminPanel.add(scrollPane);
 		
 		memberListTB = new JTable();
-		memberListTB.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"\uC544\uC774\uB514", "\uD328\uC2A4\uC6CC\uB4DC", "\uC774\uB984", "\uC8FC\uC18C", "\uB098\uC774", "\uACB0\uD63C\uC5EC\uBD80", "\uB4F1\uB85D\uC77C"
+		memberListTB.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selected_index = memberListTB.getSelectedRow();
+				memberDeleteBTN.setEnabled(true);
+				
 			}
-		));
+		});
+		
 		scrollPane.setViewportView(memberListTB);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"김경호", "김경미", "김경양"}));
-		comboBox.setBounds(235, 200, 85, 23);
+		comboBox.setBounds(235, 220, 133, 23);
 		memberAdminPanel.add(comboBox);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(12, 202, 141, 161);
+		scrollPane_1.setBounds(12, 222, 141, 161);
 		memberAdminPanel.add(scrollPane_1);
 		
 		JList list = new JList();
@@ -503,11 +517,79 @@ public class MemberMainFrame extends JFrame {
 		});
 		scrollPane_1.setViewportView(list);
 		
+		JButton memberListBTN = new JButton("회원리스트");
+		memberListBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				displayMemberList();
+			}
+		});
+		memberListBTN.setBounds(60, 166, 122, 23);
+		memberAdminPanel.add(memberListBTN);
+		
+		memberDeleteBTN = new JButton("회원삭제");
+		memberDeleteBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = memberListTB.getSelectedRow();
+				try {
+					if(selected_index >=0) {
+						String selectedId = (String)memberListTB.getValueAt(selectedRow, 0);
+						memberService.memberDelete(selectedId);
+						displayMemberList();
+					}else {
+						memberDeleteBTN.setEnabled(false);
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
+		memberDeleteBTN.setEnabled(false);
+		memberDeleteBTN.setBounds(246, 166, 122, 23);
+		memberAdminPanel.add(memberDeleteBTN);
+		
 		/********2.MemberService멤버필드객체생성*********/
 		memberService = new MemberService();
 		
 		
 	}//생성자 끝
+	
+	private void displayMemberList() {
+		/************회원리스트보기************/
+		try {
+			List<Member> memberList = memberService.memberList();
+			
+			Vector columnVector =new Vector();
+			columnVector.add("아이디");
+			columnVector.add("패스워드");
+			columnVector.add("이름");
+			columnVector.add("주소");
+			columnVector.add("나이");
+			columnVector.add("결혼");
+			columnVector.add("가입일");
+			
+			Vector tableVector = new Vector();
+			for(Member member:memberList) {
+				Vector rowVector = new Vector();
+				rowVector.add(member.getM_id());
+				rowVector.add(member.getM_password());
+				rowVector.add(member.getM_name());
+				rowVector.add(member.getM_address());
+				rowVector.add(member.getM_age());
+				rowVector.add(member.getM_married());
+				rowVector.add(member.getM_regdate());
+				tableVector.add(rowVector);
+				
+				DefaultTableModel tableModel = new DefaultTableModel(tableVector,columnVector);
+				
+				memberListTB.setModel(tableModel);
+				memberDeleteBTN.setEnabled(false);
+				
+			}
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+	}
 	
 	/*************로그아웃시    호출할 메쏘드***************/
 	private void logoutProcess() {

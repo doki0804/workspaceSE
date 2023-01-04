@@ -24,10 +24,8 @@ public class MemberDaoTestMain {
 		}else {
 			System.out.println(">> 조건에 만족하는 멤버 존재안함");
 		}
-		List<Map> rowMapList = memberDao.findAll();
-		for (Map rowMap : rowMapList) {
-			System.out.println(rowMap);
-		}
+		List<Member> rowMapList = memberDao.findAll();
+		
 		
 	}
 

@@ -89,31 +89,29 @@ public class MemberDao {
 		return tempMember;
 	}
 
-	public List<Map> findAll() throws Exception {
-		List<Map> rowMapList = new ArrayList<Map>();
+	public List<Member> findAll() throws Exception {
+		List<Member> rowMapList = new ArrayList<Member>();
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MemberSQL.SELECT_BY_FIND_ALL_SQL);
 		ResultSet rs = pstmt.executeQuery();
-		List<Member> members = new ArrayList<Member>();
+		List<Member> memberList = new ArrayList<Member>();
 		if(rs.next()) {
 			do {
-				Map rowMap = new HashMap();
-				rowMap.put("M_ID", rs.getString("m_id"));
-				rowMap.put("M_PASSWORD", rs.getString("m_password"));
-				rowMap.put("M_NAME", rs.getString("m_name"));
-				rowMap.put("M_ADDRESS", rs.getString("m_address"));
-				rowMap.put("M_AGE", rs.getString("m_age"));
-				rowMap.put("M_MARRIED", rs.getString("m_married"));
-				rowMap.put("M_REGDATE", rs.getDate("m_regdate"));
-				
-				rowMapList.add(rowMap);
-								
-			} while (rs.next());
+				memberList.add(new Member(
+						rs.getString("m_id"),
+						rs.getString("m_password"),
+						rs.getString("m_name"),
+						rs.getString("m_address"),
+						rs.getInt("m_age"),
+						rs.getString("m_married"),
+						rs.getDate("m_regdate")));
+					 }
+			while (rs.next());
 		}
 		rs.close();
 		pstmt.close();
 		dataSource.close(con);
-		return rowMapList;
+		return memberList;
 		
 		}
 }

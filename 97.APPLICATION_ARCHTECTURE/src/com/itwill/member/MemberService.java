@@ -84,5 +84,12 @@ public class MemberService {
 	public int memberDelete(String m_id) throws Exception {
 		return memberDao.delete(m_id);
 	}
+	/*
+	 * << admin >>
+	 * 회원전체리스트
+	 */
+	public List<Member> memberList() throws Exception{
+		return memberDao.findAll();
+	}
 	
 }
