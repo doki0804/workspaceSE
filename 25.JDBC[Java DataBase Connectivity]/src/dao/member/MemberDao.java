@@ -40,7 +40,6 @@ public class MemberDao {
 		dataSource.close(con);
 		return rowCount;
 		
-		
 	}
 
 	public int update(Member updateMember) throws Exception {
