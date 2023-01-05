@@ -13,7 +13,7 @@ public class OrderItem {
 	private Product product;
 	
 	public OrderItem() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public OrderItem(int oi_no, int oi_qty, int o_no, Product product) {
@@ -23,7 +23,7 @@ public class OrderItem {
 		this.o_no = o_no;
 		this.product = product;
 	}
-		
+
 	public int getOi_no() {
 		return oi_no;
 	}
