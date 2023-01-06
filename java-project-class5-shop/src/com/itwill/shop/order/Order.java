@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Orders {
+public class Order {
 	private int o_no;
 	private String o_desc;
 	private Date o_date;
@@ -15,11 +15,11 @@ public class Orders {
 	/********List<OrderItem>********/
 	private List<OrderItem> orderItemList;
 	
-	public Orders() {
+	public Order() {
 		orderItemList = new ArrayList<OrderItem>();
 	}
 
-	public Orders(int o_no, String o_desc, Date o_date, int o_price, String user_id) {
+	public Order(int o_no, String o_desc, Date o_date, int o_price, String user_id) {
 		super();
 		this.o_no = o_no;
 		this.o_desc = o_desc;

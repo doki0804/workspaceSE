@@ -1,22 +1,16 @@
 package com.itwill.chobomungo.cart;
 
+import com.itwill.chobomungo.product.Product;
+
 public class cartDaoTest {
 	
 	public static void main(String[] args) throws Exception {
 		CartDao cartDao = new CartDao(); 
-		
-		
-		// 1. insert
-		int rowCount = cartDao.insertCart(3, "book1", 6); 
-		System.out.println(rowCount);
-		
-		//2.update
-		rowCount = cartDao.updateCart(2, "book1", 6);
-		System.out.println(rowCount);
-		
-		//3.delete
-		rowCount = cartDao.deleteCart("book1", 6);
-		System.out.println(rowCount);
+		Product product = new Product();
+		Cart cart = new Cart(1,2,"book1",new Product(1,"",0,"","",0));
+		//1.담긴물건이있는지 count
+		int count = cartDao.countByProductNo(cart);
+		System.out.println(count);
 		
 		
 	}
