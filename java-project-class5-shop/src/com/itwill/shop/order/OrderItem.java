@@ -58,7 +58,7 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [oi_no=" + oi_no + ", oi_qty=" + oi_qty + ", o_no=" + o_no + ", product=" + product + "]";
+		return "OrderItem [oi_no=" + oi_no + ", oi_qty=" + oi_qty + ", o_no=" + o_no + ", product=" + product + "]\n";
 	}
 	
 	
