@@ -149,28 +149,25 @@ public class OrderDao {
 		
 		
 		if(rs.next()) {
-			order=new Order(rs.getInt("o_no"), 
-					rs.getString("o_desc"),
-					rs.getDate("o_date"),
-					rs.getInt("o_price"),rs.getString("userid"));
+			order=new Order(rs.getInt("o_no"),
+							rs.getString("o_desc"),
+							rs.getDate("o_date"),
+							rs.getInt("o_price"),
+							rs.getString("userId"));		
 			do{
 				order.getOrderItemList()
-					.add(new OrderItem(
-								rs.getInt("oi_no"), 
-								rs.getInt("oi_qty"), 
-								rs.getInt("o_no"), 
-								new Product(rs.getInt("p_no"),
-											rs.getString("p_name"),
-											rs.getInt("p_price"),
-											rs.getString("p_image"),
-											rs.getString("p_desc"),
-											rs.getInt("p_click_count"))
-								)
-							);
+					.add(new OrderItem(rs.getInt("oi_no"),
+									   rs.getInt("oi_qty"),
+									   rs.getInt("o_no"),
+									   new Product(rs.getInt("p_no"),
+											   	   rs.getString("p_title"),
+											   	   rs.getInt("p_price"),
+											   	   rs.getString("p_image"),
+											   	   rs.getString("p_desc"),
+											   	   rs.getInt("p_click_count"))
+							));				
 			}while(rs.next());
 		}
-		
-		
 		return order;
 	}
 	
