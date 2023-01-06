@@ -49,12 +49,11 @@ public class CartDao {
 	/*
 	 * 
 	 */
-	public int updateByUserId(Cart cart) throws Exception {
+	public int updateByCartNo(Cart cart) throws Exception {
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_UPDATE_BY_CART_NO_SQL);
 		pstmt.setInt(1, cart.getCart_qty());
-		pstmt.setString(2, cart.getUser_id());
-		pstmt.setInt(3, cart.getProduct().getP_no());
+		pstmt.setInt(2, cart.getCart_no());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		con.close();
@@ -62,19 +61,20 @@ public class CartDao {
 		
 	}
 	/*
-	 * 	 
+	 * 	 상품에서 카트 추가시
 	 */
-	public int updateByProductNo(Cart cart) throws Exception {
+	public int updateByUserIdProductNo(Cart cart) throws Exception {
 		Connection con =dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_COUNT_BY_USERID_PRODUCT_NO);
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_UPDATE_BY_PRODUCT_NO_USER_ID_SQL);
 		pstmt.setInt(1, cart.getCart_qty());
-		pstmt.setInt(2, cart.getProduct().getP_no());
+		pstmt.setString(2, cart.getUser_id());
+		pstmt.setInt(3, cart.getProduct().getP_no());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		con.close();
 		return rowCount;
 	}
-	
+
 	public int deleteByCartNo(Cart cart) throws Exception {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_DELETE_BY_CART_NO_SQL);
@@ -85,10 +85,10 @@ public class CartDao {
 		return rowCount;
 	}
 	
-	public int deleteAll(String user_id) throws Exception {
+	public int deleteByUserId(Cart cart) throws Exception {
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_COUNT_BY_USERID_PRODUCT_NO);
-		pstmt.setString(1, user_id);
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_DELETE_BY_USER_ID_SQL);
+		pstmt.setString(1, cart.getUser_id());
 		int rowCount = pstmt.executeUpdate();
 		pstmt.close();
 		con.close();
@@ -96,15 +96,16 @@ public class CartDao {
 	}
 	
 	public List<Cart> findByUserId(Cart cart) throws Exception {
+		List<Cart> cartList = new ArrayList<Cart>();
+		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_USER_ID_SQL);
 		pstmt.setString(1,cart.getUser_id());
 		ResultSet rs = pstmt.executeQuery();
-		List<Cart> cartList = new ArrayList<Cart>();
 		if(rs.next()) {
 			do {
-				cartList.add(new Cart(rs.getInt("c_no"),
-						rs.getInt("c_qty"),
+				cartList.add(new Cart(rs.getInt("cart_no"),
+						rs.getInt("cart_qty"),
 						rs.getString("user_id"),
 						new Product(rs.getInt("p_no"),
 								rs.getString("p_title"),
@@ -123,13 +124,12 @@ public class CartDao {
 		Cart tempCart = null;
 		
 		Connection con = dataSource.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO);
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.CART_SELECT_BY_CART_NO_SQL);
 		pstmt.setInt(1,cart.getCart_no());
 		ResultSet rs = pstmt.executeQuery();
 		if(rs.next()) {
-		
-			tempCart = new Cart(rs.getInt("c_no"),
-								rs.getInt("c_qty"),
+			tempCart = new Cart(rs.getInt("cart_no"),
+								rs.getInt("cart_qty"),
 								rs.getString("user_id"),
 								new Product(rs.getInt("p_no"),
 											rs.getString("p_title"),
@@ -142,4 +142,5 @@ public class CartDao {
 		}
 		return tempCart;
 	}
+	
 }

@@ -172,7 +172,7 @@ public class CartDao {
 		ResultSet rs=null;
 		
 		con=dataSource.getConnection();
-		pstmt=con.prepareStatement(CartSQL.CART_DELETE_BY_USERID);
+		pstmt=con.prepareStatement(CartSQL.CART_SELECT_BY_USERID);
 		pstmt.setString(1, userId);
 		rs=pstmt.executeQuery();
 		while(rs.next()) {
