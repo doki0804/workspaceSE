@@ -53,6 +53,16 @@ public class CartDao {
 		return rowCount;
 	}
 	
+	public int deleteCartAll(String user_id) throws Exception {
+		Connection con = dataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(CartSQL.FIND_BY_USER_ID_CART_SQL);
+		pstmt.setString(1, user_id);
+		int rowCount = pstmt.executeUpdate();
+		pstmt.close();
+		con.close();
+		return rowCount;
+	}
+	
 	public Cart findByP_NoCart(String user_id, int p_no) throws Exception {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(CartSQL.FIND_BY_P_NO_CART_SQL);
