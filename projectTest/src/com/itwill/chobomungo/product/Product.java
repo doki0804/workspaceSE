@@ -6,20 +6,18 @@ public class Product {
 	private int p_price;
 	private String p_image;
 	private String p_desc;
-	private int p_click_count;
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Product(int p_no, String p_title, int p_price, String p_image, String p_desc, int p_click_count) {
+	public Product(int p_no, String p_title, int p_price, String p_image, String p_desc) {
 		super();
 		this.p_no = p_no;
 		this.p_title = p_title;
 		this.p_price = p_price;
 		this.p_image = p_image;
 		this.p_desc = p_desc;
-		this.p_click_count = p_click_count;
 	}
 
 	public int getP_no() {
@@ -42,10 +40,6 @@ public class Product {
 		return p_desc;
 	}
 
-	public int getP_click_count() {
-		return p_click_count;
-	}
-
 	public void setP_no(int p_no) {
 		this.p_no = p_no;
 	}
@@ -66,14 +60,10 @@ public class Product {
 		this.p_desc = p_desc;
 	}
 
-	public void setP_click_count(int p_click_count) {
-		this.p_click_count = p_click_count;
-	}
-
 	@Override
 	public String toString() {
 		return "Product [p_no=" + p_no + ", p_title=" + p_title + ", p_price=" + p_price + ", p_image=" + p_image
-				+ ", p_desc=" + p_desc + ", p_click_count=" + p_click_count + "]";
+				+ ", p_desc=" + p_desc + ", p_click_count=" +  "]\n";
 	}
 	
 	

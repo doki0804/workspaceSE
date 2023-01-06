@@ -13,12 +13,15 @@ public class CartService {
 	//카트추가,수정
 	public int addCart(Cart cart) throws Exception {
 		if(cartDao.countByProductNo(cart)==1) {
-			return cartDao.updateByCartNo(cart);			
+			return cartDao.updateByUserIdProductNo(cart);			
 		}else {
 			return cartDao.insert(cart);
 		}
 	}
-	
+	//카트에서 수량 추가
+	public int addCartByCartNo(Cart cart) throws Exception {
+		return cartDao.updateByCartNo(cart);
+	}
 	//카트에서 cart_no로 한개 삭제
 	public int removeCartItemByCartNo(Cart cart) throws Exception {
 		return cartDao.deleteByCartNo(cart);

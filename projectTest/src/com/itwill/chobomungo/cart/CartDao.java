@@ -111,8 +111,7 @@ public class CartDao {
 								rs.getString("p_title"),
 								rs.getInt("p_price"),
 								rs.getString("p_image"),
-								rs.getString("p_desc"),
-								rs.getInt("p_click_count")))
+								rs.getString("p_desc")))
 						);
 			} while (rs.next());
 		}
@@ -135,9 +134,7 @@ public class CartDao {
 											rs.getString("p_title"),
 											rs.getInt("p_price"),
 											rs.getString("p_image"),
-											rs.getString("p_desc"),
-											rs.getInt("p_click_count")
-											)
+											rs.getString("p_desc"))
 								);
 		}
 		return tempCart;
