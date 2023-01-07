@@ -21,7 +21,7 @@ public class OrderDaoTestMain {
 		/*
 		 * 1.상품에서직접주문
 		 */
-		
+		/*
 		int p_qty=1;
 		int p_no=1;
 		ProductDao productDao=new ProductDao();
@@ -33,10 +33,11 @@ public class OrderDaoTestMain {
 		Orders newOrder=new Orders(0,product.getP_title()+"외 0종" ,  product.getP_price(), new Date(0), new User("book1",null,null,null,null,null));
 		newOrder.setOrderItemList(orderItemList);
 		orderDao.insert(newOrder);
-		
+		*/
 		/*
 		 * 2.cart에서 주문
 		 */
+		/*
 		int o_price = 0;
 		String o_desc=null;
 		Cart tempCart = new Cart(0,2,"book2",null);
@@ -66,7 +67,7 @@ public class OrderDaoTestMain {
 		
 		//주문목록
 		orderDao.findByOrderNo(newOrder2);
-		
+		*/
 	}
 
 }

@@ -15,26 +15,24 @@ public class CartDaoTestMain {
 		int rowCount=-999;
 		rowCount =cartDao.insert(addCart);
 		System.out.println(">> "+rowCount);
-		*/
-		/*
+		
 		System.out.println("2.updateByCartNo");
-		int rowCount=cartDao.updateByCartNo(new Cart(1,3,null,null));
+		rowCount=cartDao.updateByCartNo(new Cart(1,3,null,null));
 		System.out.println(">> "+rowCount);
 		
 		System.out.println("2.updateByProductNoAndUserId");
 		rowCount=cartDao.updateByUserIdProductNo(new Cart(0, 4, "book1", new Product(2,null,0,null,null)));
 		System.out.println(">> "+rowCount);
-		*/
-		/*
+		
 		System.out.println("3.delete");
-		int rowCount=cartDao.deleteByCartNo(new Cart(9,0,null,null));
+		rowCount=cartDao.deleteByCartNo(new Cart(9,0,null,null));
 		System.out.println(">> "+rowCount);
 		*/
 		System.out.println("4.cartList[select]");
 		List<Cart> cartList1=cartDao.findByUserId(new Cart(0,0,"book1",null));
-		System.out.println("guard1-->"+cartList1);
+		System.out.println("book1-->"+cartList1);
 		List<Cart> cartList2=cartDao.findByUserId(new Cart(0,0,"book2",null));
-		System.out.println("guard2-->"+cartList2);
+		System.out.println("book2-->"+cartList2);
 		System.out.println("5.selectProductCount");
 		int productCount1=cartDao.countByProductNo(new Cart(0,0,"book1",new Product(2,null,0,null,null)));
 		System.out.println(">> "+productCount1);
