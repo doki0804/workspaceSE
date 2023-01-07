@@ -19,7 +19,7 @@ public class OrderDao {
 		dataSource = new DataSource();
 	}
 	
-	public int Insert(Orders orders) throws Exception {
+	public int insert(Orders orders) throws Exception {
 		//"insert into orders(o_no,o_desc,o_price,o_date,user_id) values(orders_o_no_SEQ_nextval,?,?,sysdate,?)"
 
 		Connection con =null;
@@ -78,7 +78,7 @@ public class OrderDao {
 		return rowCount;
 	}
 	//cart_no로 주문 1개 삭제
-	public int deleteByCartNo(Orders orders) throws Exception {
+	public int deleteByOrderNo(Orders orders) throws Exception {
 		Connection con =null;
 		PreparedStatement pstmt = null;
 		int rowCount = 0;
