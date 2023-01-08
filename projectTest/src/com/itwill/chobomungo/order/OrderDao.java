@@ -1,10 +1,8 @@
 package com.itwill.chobomungo.order;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +30,14 @@ public class OrderDao {
 			pstmt1.setString(1,orders.getO_desc());
 			pstmt1.setInt(2,orders.getO_price());
 			pstmt1.setString(3,orders.getUser().getUser_id());
-			pstmt1.executeQuery();
+			pstmt1.executeUpdate();
 			
 			// "insert into order_item(oi.no,oi_qty,o_no,p_no) values(order_item_oi_no_SEQ_nextval,?,orders_o_no_SEQ_nextval,?)"
 			pstmt2 = con.prepareStatement(OrderSQL.ORDERITEM_INSERT);
 			for(OrderItem orderItem : orders.getOrderItemList()) {
 				pstmt2.setInt(1, orderItem.getOi_qty());
 				pstmt2.setInt(2, orderItem.getProduct().getP_no());
-				pstmt2.executeQuery();
+				pstmt2.executeUpdate();
 			}
 			con.commit();
 			
@@ -48,12 +46,11 @@ public class OrderDao {
 			con.rollback();
 			throw e;
 		}finally {
-			if(con!=null) {
+			if(con!=null){
 				pstmt1.close();
 				pstmt2.close();
 				dataSource.close(con);
 			}
-
 		}
 		return 0;
 	}
@@ -75,13 +72,11 @@ public class OrderDao {
 			con.rollback();
 			throw e;
 		}finally {
-			if(con!=null) {
+			if(con!=null){
 				pstmt.close();
 				dataSource.close(con);
 			}
-			
 		}
-		
 		return rowCount;
 	}
 	//cart_no로 주문 1개 삭제
@@ -93,7 +88,8 @@ public class OrderDao {
 			con = dataSource.getConnection();
 			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(OrderSQL.ORDER_DELETE_ORDER_NO);
-			pstmt.setInt(1,orders.getO_no());
+			pstmt.setString(1,orders.getUser().getUser_id());
+			pstmt.setInt(2,orders.getO_no());
 			rowCount = pstmt.executeUpdate();
 			con.commit();			
 		}catch (Exception e) {
@@ -101,7 +97,7 @@ public class OrderDao {
 			con.rollback();
 			throw e;
 		} finally {
-			if(con!=null) {
+			if(con!=null){
 				pstmt.close();
 				dataSource.close(con);
 			}
@@ -109,7 +105,7 @@ public class OrderDao {
 		return rowCount;
 	}
 	//User_ID의 주문리스트
-	public List<Orders> findByUserID(Orders orders) throws Exception {
+	public List<Orders> findByUserID(String sUserId) throws Exception {
 		List<Orders> orderList = new ArrayList<Orders>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -117,27 +113,25 @@ public class OrderDao {
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(OrderSQL.ORDER_SELECT_USERID);
-			pstmt.setString(1,orders.getUser().getUser_id());
+			pstmt.setString(1,sUserId);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				rs.getInt("o_no");
-				rs.getString("o_desc");
-				rs.getInt("o_price");
-				rs.getDate("o_date");
+				orderList.add(new Orders(rs.getInt("o_no"),
+				rs.getString("o_desc"),
+				rs.getInt("o_price"),
+				rs.getDate("o_date"),
 				new User(rs.getString("user_id"),
 						rs.getString("user_pw"),
 						rs.getString("user_name"),
 						rs.getString("user_phone"),
 						rs.getString("user_address"),
 						rs.getString("user_email")
-						);
-			}
+						)));
+			} 
 			
 		} finally {
 			if(con!=null){
-				rs.close();
-				pstmt.close();
-				dataSource.close(con);
+				con.close();
 			}
 		}
 		return orderList;
@@ -155,16 +149,17 @@ public class OrderDao {
 			pstmt.setInt(2, orders.getO_no());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				rs.getInt("o_no");
-				rs.getString("o_desc");
-				rs.getInt("o_price");
-				rs.getDate("o_date");
-				new User(rs.getString("user_id"),
-						rs.getString("user_pw"),
-						rs.getString("user_name"),
-						rs.getString("user_phone"),
-						rs.getString("user_address"),
-						rs.getString("user_email"));
+				order = new Orders(rs.getInt("o_no"),
+								   rs.getString("o_desc"),
+								   rs.getInt("o_price"),
+								   rs.getDate("o_date"),
+									new User(rs.getString("user_id"),
+											rs.getString("user_pw"),
+											rs.getString("user_name"),
+											rs.getString("user_phone"),
+											rs.getString("user_address"),
+											rs.getString("user_email")));
+				
 				do {
 					order.getOrderItemList().
 						add(new OrderItem(rs.getInt("oi_no"),
@@ -180,9 +175,8 @@ public class OrderDao {
 			}
 		}finally {
 			if(con!=null){
-				rs.close();
-				pstmt.close();
-				dataSource.close(con);
+				
+				con.close();
 			}
 		}
 		return order;

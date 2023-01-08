@@ -13,9 +13,10 @@ public class OrderDaoTestMain {
 
 	public static void main(String[] args) throws Exception{
 		OrderDao orderDao=new OrderDao();
+		/*
 		System.out.println(orderDao.findByUserId("guard1"));
 		System.out.println(orderDao.findByOrderNo("guard1",1));
-		
+		*/
 		/*
 		 * 1.상품에서직접주문
 		 */

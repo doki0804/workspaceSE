@@ -16,7 +16,7 @@ public class Orders {
 	List<OrderItem> orderItemList;
 	
 	public Orders() {
-		user = new User();
+
 		orderItemList = new ArrayList<OrderItem>();
 	}
 
@@ -26,7 +26,7 @@ public class Orders {
 		this.o_desc = o_desc;
 		this.o_price = o_price;
 		this.o_date = o_date;
-		this.user = new User();
+		this.user = user;
 		this.orderItemList = new ArrayList<OrderItem>();
 	}
 

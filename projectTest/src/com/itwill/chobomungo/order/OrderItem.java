@@ -9,6 +9,7 @@ public class OrderItem {
 	private Product product;
 	
 	public OrderItem() {
+		
 		product = new Product();
 	}
 
@@ -17,7 +18,7 @@ public class OrderItem {
 		this.oi_no = oi_no;
 		this.oi_qty = oi_qty;
 		this.o_no = o_no;
-		this.product = new Product();
+		this.product = product;
 	}
 
 	public int getOi_no() {
