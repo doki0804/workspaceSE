@@ -17,29 +17,35 @@ import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Cursor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import java.awt.Rectangle;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 public class chobomungoMainFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField loginIdTF;
-	private JButton loginBTN;
-	private JButton joinBTN;
-	private JTextField joinNameTF;
-	private JTextField joinPhoneTF;
-	private JTextField joinAddressTF;
-	private JTextField joinEmailTF;
-	private JTextField userInfoId;
-	private JTextField uesrInfoPasswordTF;
-	private JTextField userInfoPasswordCKTF;
-	private JTextField userInfoName;
-	private JTextField userinfoPhone;
-	private JTextField userinfoaddres;
-	private JTextField userInfoEmailTF;
-	private JTextField searchTF;
-	private JTextField joinIdTF;
-	private JPasswordField joinPasswordField;
-	private JPasswordField joinPasswordCKField;
+	private JTextField topSearchTF;
 	private JPasswordField passwordField;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JPasswordField passwordField_1;
+	private JPasswordField passwordField_2;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JPasswordField passwordField_3;
+	private JPasswordField passwordField_4;
 
 	/**
 	 * Launch the application.
@@ -61,8 +67,10 @@ public class chobomungoMainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public chobomungoMainFrame() {
+		setPreferredSize(new Dimension(340, 720));
+		setTitle("CHOBO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 453, 594);
+		setBounds(100, 100, 420, 594);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -83,6 +91,60 @@ public class chobomungoMainFrame extends JFrame {
 		JPanel productMainPanel = new JPanel();
 		productMainPanel.setBackground(Color.WHITE);
 		productTabbedPane.addTab("메인", null, productMainPanel, null);
+		productMainPanel.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane bookMainScrollPane = new JScrollPane();
+		bookMainScrollPane.setBackground(Color.WHITE);
+		productMainPanel.add(bookMainScrollPane, BorderLayout.CENTER);
+		
+		JPanel BookMainPanel = new JPanel();
+		BookMainPanel.setPreferredSize(new Dimension(360, 720));
+		BookMainPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		BookMainPanel.setBackground(Color.WHITE);
+		bookMainScrollPane.setViewportView(BookMainPanel);
+		
+		JPanel productPanel_1 = new JPanel();
+		productPanel_1.setLayout(null);
+		productPanel_1.setSize(new Dimension(120, 120));
+		productPanel_1.setPreferredSize(new Dimension(170, 190));
+		productPanel_1.setMinimumSize(new Dimension(150, 150));
+		productPanel_1.setMaximumSize(new Dimension(200, 200));
+		productPanel_1.setBounds(new Rectangle(0, 0, 120, 120));
+		productPanel_1.setBorder(null);
+		productPanel_1.setBackground(Color.WHITE);
+		productPanel_1.setAlignmentY(1.0f);
+		productPanel_1.setAlignmentX(1.0f);
+		BookMainPanel.add(productPanel_1);
+		
+		JLabel productImageLabel = new JLabel("");
+		productImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		productImageLabel.setBounds(3, 1, 162, 116);
+		productPanel_1.add(productImageLabel);
+		
+		JLabel productDescLabel = new JLabel("<html>\r\n\t<font size='3'>\r\n\t\t\r\n\t\t\t제목: 난중일기<br>\r\n\t\t\t가격: 24,000<br>\r\n\t\t\t설명: 임진왜란에...\r\n\t\t\r\n </font></html>");
+		productDescLabel.setVerticalAlignment(SwingConstants.TOP);
+		productDescLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		productDescLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		productDescLabel.setBounds(3, 143, 164, 47);
+		productPanel_1.add(productDescLabel);
+		
+		JButton cartAddButton = new JButton("");
+		cartAddButton.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/smallcart.png")));
+		cartAddButton.setOpaque(false);
+		cartAddButton.setForeground(Color.WHITE);
+		cartAddButton.setBorder(null);
+		cartAddButton.setBackground(Color.WHITE);
+		cartAddButton.setBounds(136, 119, 31, 23);
+		productPanel_1.add(cartAddButton);
+		
+		JComboBox cartQtyComboBox = new JComboBox();
+		cartQtyComboBox.setOpaque(false);
+		cartQtyComboBox.setMaximumRowCount(10);
+		cartQtyComboBox.setBorder(null);
+		cartQtyComboBox.setBackground(Color.WHITE);
+		cartQtyComboBox.setAutoscrolls(true);
+		cartQtyComboBox.setBounds(99, 119, 33, 23);
+		productPanel_1.add(cartQtyComboBox);
 		
 		JPanel pNo_1_panel = new JPanel();
 		pNo_1_panel.setBackground(Color.WHITE);
@@ -98,198 +160,216 @@ public class chobomungoMainFrame extends JFrame {
 		JPanel loginPanel = new JPanel();
 		loginPanel.setBackground(SystemColor.window);
 		tabbedPane.addTab("로그인", null, loginPanel, null);
-		loginPanel.setLayout(null);
+		loginPanel.setLayout(new BorderLayout(0, 0));
 		
-		loginIdTF = new JTextField();
-		loginIdTF.setBounds(148, 126, 147, 29);
-		loginPanel.add(loginIdTF);
-		loginIdTF.setColumns(10);
+		JLayeredPane layeredPane = new JLayeredPane();
+		loginPanel.add(layeredPane, BorderLayout.CENTER);
 		
-		loginBTN = new JButton("로그인");
-		loginBTN.setBounds(85, 283, 97, 23);
-		loginPanel.add(loginBTN);
+		JButton loginBTN = new JButton("로그인");
+		loginBTN.setBounds(76, 283, 97, 23);
+		layeredPane.add(loginBTN);
 		
-		joinBTN = new JButton("회원가입");
-		joinBTN.setBounds(217, 283, 97, 23);
-		loginPanel.add(joinBTN);
-		
-		JLabel lblNewLabel = new JLabel("아이디");
-		lblNewLabel.setFont(new Font("D2Coding", Font.PLAIN, 14));
-		lblNewLabel.setBounds(85, 133, 57, 15);
-		loginPanel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("패스워드");
-		lblNewLabel_1.setFont(new Font("D2Coding", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(85, 194, 57, 15);
-		loginPanel.add(lblNewLabel_1);
+		JButton joinBTN = new JButton("회원가입");
+		joinBTN.setBounds(208, 283, 97, 23);
+		layeredPane.add(joinBTN);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(148, 187, 147, 29);
-		loginPanel.add(passwordField);
+		passwordField.setBounds(139, 187, 147, 29);
+		layeredPane.add(passwordField);
+		
+		JLabel lblNewLabel_1 = new JLabel("패스워드");
+		lblNewLabel_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(76, 194, 57, 15);
+		layeredPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel("아이디");
+		lblNewLabel.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel.setBounds(76, 133, 57, 15);
+		layeredPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(139, 126, 147, 29);
+		layeredPane.add(textField);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/login-.png")));
+		lblNewLabel_4.setBounds(151, 25, 72, 91);
+		layeredPane.add(lblNewLabel_4);
 		
 		JPanel joinPanel = new JPanel();
 		joinPanel.setBackground(SystemColor.window);
 		tabbedPane.addTab("회원가입", null, joinPanel, null);
-		joinPanel.setLayout(null);
+		joinPanel.setLayout(new BorderLayout(0, 0));
+		
+		JLayeredPane layeredPane_1 = new JLayeredPane();
+		joinPanel.add(layeredPane_1, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_2 = new JLabel("아이디");
-		lblNewLabel_2.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(67, 79, 57, 15);
-		joinPanel.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2.setBounds(76, 95, 95, 15);
+		layeredPane_1.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("비밀번호");
-		lblNewLabel_2_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_1.setBounds(67, 114, 57, 15);
-		joinPanel.add(lblNewLabel_2_1);
+		lblNewLabel_2_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_1.setBounds(76, 130, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_1);
 		
 		JLabel lblNewLabel_2_2 = new JLabel("비밀번호확인");
-		lblNewLabel_2_2.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2.setBounds(67, 150, 72, 15);
-		joinPanel.add(lblNewLabel_2_2);
+		lblNewLabel_2_2.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2.setBounds(76, 166, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_2);
 		
 		JLabel lblNewLabel_2_2_1 = new JLabel("전화번호");
-		lblNewLabel_2_2_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_1.setBounds(67, 218, 57, 15);
-		joinPanel.add(lblNewLabel_2_2_1);
+		lblNewLabel_2_2_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_1.setBounds(76, 234, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_2_1);
 		
 		JLabel lblNewLabel_2_2_2 = new JLabel("주소");
-		lblNewLabel_2_2_2.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_2.setBounds(67, 251, 57, 15);
-		joinPanel.add(lblNewLabel_2_2_2);
+		lblNewLabel_2_2_2.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_2.setBounds(76, 267, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_2_2);
 		
 		JLabel lblNewLabel_2_2_2_1 = new JLabel("e-mail");
-		lblNewLabel_2_2_2_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_2_1.setBounds(67, 285, 57, 15);
-		joinPanel.add(lblNewLabel_2_2_2_1);
+		lblNewLabel_2_2_2_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_2_1.setBounds(76, 301, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_2_2_1);
 		
 		JLabel lblNewLabel_2_2_1_1 = new JLabel("이름");
-		lblNewLabel_2_2_1_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_1_1.setBounds(67, 187, 57, 15);
-		joinPanel.add(lblNewLabel_2_2_1_1);
+		lblNewLabel_2_2_1_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_1_1.setBounds(76, 203, 95, 15);
+		layeredPane_1.add(lblNewLabel_2_2_1_1);
 		
-		joinIdTF = new JTextField();
-		joinIdTF.setBounds(160, 76, 138, 21);
-		joinPanel.add(joinIdTF);
-		joinIdTF.setColumns(10);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(169, 92, 138, 21);
+		layeredPane_1.add(textField_1);
 		
-		joinNameTF = new JTextField();
-		joinNameTF.setColumns(10);
-		joinNameTF.setBounds(160, 184, 138, 21);
-		joinPanel.add(joinNameTF);
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(169, 200, 138, 21);
+		layeredPane_1.add(textField_2);
 		
-		joinPhoneTF = new JTextField();
-		joinPhoneTF.setColumns(10);
-		joinPhoneTF.setBounds(160, 215, 138, 21);
-		joinPanel.add(joinPhoneTF);
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(169, 231, 138, 21);
+		layeredPane_1.add(textField_3);
 		
-		joinAddressTF = new JTextField();
-		joinAddressTF.setColumns(10);
-		joinAddressTF.setBounds(160, 248, 138, 21);
-		joinPanel.add(joinAddressTF);
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(169, 264, 138, 21);
+		layeredPane_1.add(textField_4);
 		
-		joinEmailTF = new JTextField();
-		joinEmailTF.setColumns(10);
-		joinEmailTF.setBounds(160, 282, 138, 21);
-		joinPanel.add(joinEmailTF);
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(169, 298, 138, 21);
+		layeredPane_1.add(textField_5);
 		
 		JButton joinJoinBTN = new JButton("회원가입");
-		joinJoinBTN.setBounds(90, 347, 97, 23);
-		joinPanel.add(joinJoinBTN);
+		joinJoinBTN.setBounds(76, 333, 97, 23);
+		layeredPane_1.add(joinJoinBTN);
 		
 		JButton joinCancleBTN = new JButton("취소");
-		joinCancleBTN.setBounds(224, 347, 97, 23);
-		joinPanel.add(joinCancleBTN);
+		joinCancleBTN.setBounds(210, 333, 97, 23);
+		layeredPane_1.add(joinCancleBTN);
 		
-		joinPasswordField = new JPasswordField();
-		joinPasswordField.setBounds(160, 111, 138, 21);
-		joinPanel.add(joinPasswordField);
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(169, 127, 138, 21);
+		layeredPane_1.add(passwordField_1);
 		
-		joinPasswordCKField = new JPasswordField();
-		joinPasswordCKField.setBounds(160, 147, 138, 21);
-		joinPanel.add(joinPasswordCKField);
+		passwordField_2 = new JPasswordField();
+		passwordField_2.setBounds(169, 163, 138, 21);
+		layeredPane_1.add(passwordField_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("      회원 가입");
+		lblNewLabel_3.setFont(new Font("D2Coding", Font.BOLD, 16));
+		lblNewLabel_3.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/link.png")));
+		lblNewLabel_3.setBounds(81, 10, 226, 58);
+		layeredPane_1.add(lblNewLabel_3);
 		
 		JPanel userInfoPanel = new JPanel();
 		userInfoPanel.setBackground(SystemColor.window);
 		tabbedPane.addTab("회원정보", null, userInfoPanel, null);
-		userInfoPanel.setLayout(null);
+		userInfoPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton infoUpdateBTN = new JButton("정보수정");
-		infoUpdateBTN.setBounds(91, 338, 97, 23);
-		userInfoPanel.add(infoUpdateBTN);
+		JLayeredPane layeredPane_1_1 = new JLayeredPane();
+		userInfoPanel.add(layeredPane_1_1, BorderLayout.CENTER);
 		
 		JLabel lblNewLabel_2_3 = new JLabel("아이디");
-		lblNewLabel_2_3.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_3.setBounds(91, 70, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_3);
-		
-		userInfoId = new JTextField();
-		userInfoId.setColumns(10);
-		userInfoId.setBounds(184, 67, 138, 21);
-		userInfoPanel.add(userInfoId);
-		
-		uesrInfoPasswordTF = new JTextField();
-		uesrInfoPasswordTF.setColumns(10);
-		uesrInfoPasswordTF.setBounds(184, 102, 138, 21);
-		userInfoPanel.add(uesrInfoPasswordTF);
+		lblNewLabel_2_3.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_3.setBounds(74, 63, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_3);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("비밀번호");
-		lblNewLabel_2_1_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_1_1.setBounds(91, 105, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_1_1);
+		lblNewLabel_2_1_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_1_1.setBounds(74, 98, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_1_1);
 		
 		JLabel lblNewLabel_2_2_3 = new JLabel("비밀번호확인");
-		lblNewLabel_2_2_3.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_3.setBounds(91, 141, 72, 15);
-		userInfoPanel.add(lblNewLabel_2_2_3);
-		
-		userInfoPasswordCKTF = new JTextField();
-		userInfoPasswordCKTF.setColumns(10);
-		userInfoPasswordCKTF.setBounds(184, 138, 138, 21);
-		userInfoPanel.add(userInfoPasswordCKTF);
-		
-		userInfoName = new JTextField();
-		userInfoName.setColumns(10);
-		userInfoName.setBounds(184, 175, 138, 21);
-		userInfoPanel.add(userInfoName);
-		
-		JLabel lblNewLabel_2_2_1_1_1 = new JLabel("이름");
-		lblNewLabel_2_2_1_1_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_1_1_1.setBounds(91, 178, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_2_1_1_1);
+		lblNewLabel_2_2_3.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_3.setBounds(74, 134, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_2_3);
 		
 		JLabel lblNewLabel_2_2_1_2 = new JLabel("전화번호");
-		lblNewLabel_2_2_1_2.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_1_2.setBounds(91, 209, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_2_1_2);
-		
-		userinfoPhone = new JTextField();
-		userinfoPhone.setColumns(10);
-		userinfoPhone.setBounds(184, 206, 138, 21);
-		userInfoPanel.add(userinfoPhone);
-		
-		userinfoaddres = new JTextField();
-		userinfoaddres.setColumns(10);
-		userinfoaddres.setBounds(184, 239, 138, 21);
-		userInfoPanel.add(userinfoaddres);
+		lblNewLabel_2_2_1_2.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_1_2.setBounds(74, 202, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_2_1_2);
 		
 		JLabel lblNewLabel_2_2_2_2 = new JLabel("주소");
-		lblNewLabel_2_2_2_2.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_2_2.setBounds(91, 242, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_2_2_2);
+		lblNewLabel_2_2_2_2.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_2_2.setBounds(74, 235, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_2_2_2);
 		
 		JLabel lblNewLabel_2_2_2_1_1 = new JLabel("e-mail");
-		lblNewLabel_2_2_2_1_1.setFont(new Font("D2Coding", Font.PLAIN, 12));
-		lblNewLabel_2_2_2_1_1.setBounds(91, 276, 57, 15);
-		userInfoPanel.add(lblNewLabel_2_2_2_1_1);
+		lblNewLabel_2_2_2_1_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_2_1_1.setBounds(74, 269, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_2_2_1_1);
 		
-		userInfoEmailTF = new JTextField();
-		userInfoEmailTF.setColumns(10);
-		userInfoEmailTF.setBounds(184, 273, 138, 21);
-		userInfoPanel.add(userInfoEmailTF);
+		JLabel lblNewLabel_2_2_1_1_1 = new JLabel("이름");
+		lblNewLabel_2_2_1_1_1.setFont(new Font("D2Coding", Font.BOLD, 14));
+		lblNewLabel_2_2_1_1_1.setBounds(74, 171, 95, 15);
+		layeredPane_1_1.add(lblNewLabel_2_2_1_1_1);
 		
-		JButton infoDeleteBTN = new JButton("회원가입");
-		infoDeleteBTN.setBounds(225, 338, 97, 23);
-		userInfoPanel.add(infoDeleteBTN);
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(167, 60, 138, 21);
+		layeredPane_1_1.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(167, 168, 138, 21);
+		layeredPane_1_1.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(167, 199, 138, 21);
+		layeredPane_1_1.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(167, 232, 138, 21);
+		layeredPane_1_1.add(textField_9);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(167, 266, 138, 21);
+		layeredPane_1_1.add(textField_10);
+		
+		JButton joinJoinBTN_1 = new JButton("정보수정");
+		joinJoinBTN_1.setBounds(74, 331, 97, 23);
+		layeredPane_1_1.add(joinJoinBTN_1);
+		
+		JButton joinCancleBTN_1 = new JButton("회원탈퇴");
+		joinCancleBTN_1.setBounds(208, 331, 97, 23);
+		layeredPane_1_1.add(joinCancleBTN_1);
+		
+		passwordField_3 = new JPasswordField();
+		passwordField_3.setBounds(167, 95, 138, 21);
+		layeredPane_1_1.add(passwordField_3);
+		
+		passwordField_4 = new JPasswordField();
+		passwordField_4.setBounds(167, 131, 138, 21);
+		layeredPane_1_1.add(passwordField_4);
 		
 		JPanel cartPanel = new JPanel();
 		cartPanel.setBackground(Color.WHITE);
@@ -312,43 +392,71 @@ public class chobomungoMainFrame extends JFrame {
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(Color.WHITE);
-		topPanel.setPreferredSize(new Dimension(10, 35));
+		topPanel.setPreferredSize(new Dimension(10, 45));
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(null);
 		
-		searchTF = new JTextField();
-		searchTF.setBounds(91, 8, 182, 21);
-		topPanel.add(searchTF);
-		searchTF.setColumns(10);
+		topSearchTF = new JTextField();
+		topSearchTF.setBounds(97, 9, 182, 25);
+		topPanel.add(topSearchTF);
+		topSearchTF.setColumns(10);
 		
-		JButton searchBTN = new JButton("");
-		searchBTN.setBounds(266, 3, 53, 29);
-		searchBTN.setOpaque(false);
-		searchBTN.setBorderPainted(false);
-		searchBTN.setForeground(Color.WHITE);
-		searchBTN.setBackground(Color.WHITE);
-		searchBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/com/itwill/chobomungo/image/search_image20.png")));
-		topPanel.add(searchBTN);
+		JButton topSearchBTN = new JButton("");
+		topSearchBTN.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		topSearchBTN.setBounds(277, 8, 53, 29);
+		topSearchBTN.setOpaque(false);
+		topSearchBTN.setBorderPainted(false);
+		topSearchBTN.setForeground(Color.WHITE);
+		topSearchBTN.setBackground(Color.WHITE);
+		topSearchBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/search_image.png")));
+		topPanel.add(topSearchBTN);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(318, 8, 97, 23);
-		topPanel.add(btnNewButton_1);
+		JButton topCartBTN = new JButton("");
+		topCartBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/trolley.png")));
+		topCartBTN.setOpaque(false);
+		topCartBTN.setForeground(Color.WHITE);
+		topCartBTN.setBorderPainted(false);
+		topCartBTN.setBackground(Color.WHITE);
+		topCartBTN.setBounds(331, 3, 53, 42);
+		topPanel.add(topCartBTN);
 		
 		JPanel bottomPanel = new JPanel();
+		bottomPanel.setBackground(Color.WHITE);
 		bottomPanel.setPreferredSize(new Dimension(10, 50));
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(null);
 		
-		JButton orderBTN = new JButton("New button");
-		orderBTN.setBounds(59, 17, 97, 23);
-		bottomPanel.add(orderBTN);
+		JButton btOrderBTN = new JButton("");
+		btOrderBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btOrderBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/order-now.png")));
+		btOrderBTN.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btOrderBTN.setBackground(Color.WHITE);
+		btOrderBTN.setBorderPainted(false);
+		btOrderBTN.setOpaque(false);
+		btOrderBTN.setBounds(47, 0, 62, 50);
+		bottomPanel.add(btOrderBTN);
 		
-		JButton mainBTN = new JButton("New button");
-		mainBTN.setBounds(171, 17, 97, 23);
-		bottomPanel.add(mainBTN);
+		JButton btHomeBTN = new JButton("");
+		btHomeBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/house.png")));
+		btHomeBTN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btHomeBTN.setOpaque(false);
+		btHomeBTN.setBorderPainted(false);
+		btHomeBTN.setBackground(Color.WHITE);
+		btHomeBTN.setBounds(163, 0, 62, 50);
+		bottomPanel.add(btHomeBTN);
 		
-		JButton userInfoBTN = new JButton("New button");
-		userInfoBTN.setBounds(280, 17, 97, 23);
-		bottomPanel.add(userInfoBTN);
+		JButton btUserBTN = new JButton("");
+		btUserBTN.setIcon(new ImageIcon(chobomungoMainFrame.class.getResource("/image/user.png")));
+		btUserBTN.setOpaque(false);
+		btUserBTN.setBorderPainted(false);
+		btUserBTN.setBackground(Color.WHITE);
+		btUserBTN.setBounds(280, 0, 62, 50);
+		bottomPanel.add(btUserBTN);
 	}
 }
