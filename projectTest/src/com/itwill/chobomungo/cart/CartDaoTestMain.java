@@ -9,33 +9,32 @@ public class CartDaoTestMain {
 	
 	public static void main(String[] args) throws Exception {
 		CartDao cartDao=new CartDao();
-		/*
+
 		System.out.println("1.add(insert)");
-		Cart addCart=new Cart(0,1,"book1",new Product(1,null,0,null,null));
+		Cart addCart=new Cart(0,1,"book3",new Product(8, null, 0, null, null));
 		int rowCount=-999;
-		rowCount =cartDao.insert(addCart);
+		rowCount =cartDao.insert(1,addCart.getUser_id(),8);
 		System.out.println(">> "+rowCount);
 		
 		System.out.println("2.updateByCartNo");
-		rowCount=cartDao.updateByCartNo(new Cart(1,3,null,null));
+		rowCount=cartDao.updateByCartNo(1,3);
 		System.out.println(">> "+rowCount);
 		
 		System.out.println("2.updateByProductNoAndUserId");
-		rowCount=cartDao.updateByUserIdProductNo(new Cart(0, 4, "book1", new Product(2,null,0,null,null)));
+		rowCount=cartDao.updateByUserIdProductNo(4,"book1",1);
 		System.out.println(">> "+rowCount);
 		
 		System.out.println("3.delete");
-		rowCount=cartDao.deleteByCartNo(new Cart(9,0,null,null));
+		rowCount=cartDao.deleteByCartNo(10);
 		System.out.println(">> "+rowCount);
-		*/
+		
 		System.out.println("4.cartList[select]");
-		List<Cart> cartList1=cartDao.findByUserId(new Cart(0,0,"book1",null));
+		List<Cart> cartList1=cartDao.findByUserId("book1");
 		System.out.println("book1-->"+cartList1);
-		List<Cart> cartList2=cartDao.findByUserId(new Cart(0,0,"book2",null));
+		List<Cart> cartList2=cartDao.findByUserId("book2");
 		System.out.println("book2-->"+cartList2);
 		System.out.println("5.selectProductCount");
-		int productCount1=cartDao.countByProductNo(new Cart(0,0,"book1",new Product(2,null,0,null,null)));
+		int productCount1=cartDao.countByProductNo("book2",4);
 		System.out.println(">> "+productCount1);
-		
 	}
 }
