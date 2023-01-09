@@ -14,8 +14,10 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 
 public class OrderPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField orderDeliveryAddressTF;
+	private JTextField orderDeliveryNameTF;
+	private JPanel orderDetailPanel;
+	private JPanel orderListPanel;
 
 	/**
 	 * Create the panel.
@@ -49,15 +51,15 @@ public class OrderPanel extends JPanel {
 		orderDeliveryCB.setBounds(238, 6, 102, 23);
 		orderDeliveryPanel.add(orderDeliveryCB);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(92, 36, 229, 21);
-		orderDeliveryPanel.add(textField);
+		orderDeliveryAddressTF = new JTextField();
+		orderDeliveryAddressTF.setColumns(10);
+		orderDeliveryAddressTF.setBounds(92, 36, 229, 21);
+		orderDeliveryPanel.add(orderDeliveryAddressTF);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(92, 67, 229, 21);
-		orderDeliveryPanel.add(textField_1);
+		orderDeliveryNameTF = new JTextField();
+		orderDeliveryNameTF.setColumns(10);
+		orderDeliveryNameTF.setBounds(92, 67, 229, 21);
+		orderDeliveryPanel.add(orderDeliveryNameTF);
 		
 		JLabel orderDeliveryAddressLB = new JLabel("주소");
 		orderDeliveryAddressLB.setFont(new Font("D2Coding ligature", Font.PLAIN, 14));
@@ -104,11 +106,11 @@ public class OrderPanel extends JPanel {
 		orderListScrollPane.setBounds(12, 178, 348, 188);
 		orderPanel.add(orderListScrollPane);
 		
-		JPanel orderListPanel = new JPanel();
+		orderListPanel = new JPanel();
 		orderListPanel.setPreferredSize(new Dimension(320, 200));
 		orderListScrollPane.setViewportView(orderListPanel);
 		
-		JPanel orderDetailPanel = new JPanel();
+		orderDetailPanel = new JPanel();
 		orderDetailPanel.setLayout(null);
 		orderDetailPanel.setPreferredSize(new Dimension(320, 60));
 		orderListPanel.add(orderDetailPanel);
@@ -116,7 +118,22 @@ public class OrderPanel extends JPanel {
 		JLabel orderDetailLB = new JLabel("New label");
 		orderDetailLB.setBounds(0, 0, 320, 60);
 		orderDetailPanel.add(orderDetailLB);
-
+		
+		displayOrderList();
 	}
 
+	public void displayOrderList() {
+		orderDetailPanel.removeAll();
+		for(int i = 0 ; i<5 ; i++) {
+			
+			JPanel orderDetailPanel = new JPanel();
+			orderDetailPanel.setLayout(null);
+			orderDetailPanel.setPreferredSize(new Dimension(320, 60));
+			orderListPanel.add(orderDetailPanel);
+			
+			JLabel orderDetailLB = new JLabel("New label");
+			orderDetailLB.setBounds(0, 0, 320, 60);
+			orderDetailPanel.add(orderDetailLB);
+		}
+	}
 }
