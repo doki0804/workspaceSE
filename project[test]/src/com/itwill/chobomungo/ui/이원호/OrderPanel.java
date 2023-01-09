@@ -16,30 +16,24 @@ import java.awt.Dimension;
 public class OrderPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
-	private JLabel orderNumberOfItemtLB;
 
 	/**
 	 * Create the panel.
 	 */
 	public OrderPanel() {
-		setPreferredSize(new Dimension(400, 620));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel orderPanel = new JPanel();
+		orderPanel.setLayout(null);
+		orderPanel.setBackground(Color.WHITE);
 		add(orderPanel, BorderLayout.CENTER);
-		orderPanel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel orderPanel_1 = new JPanel();
-		orderPanel_1.setLayout(null);
-		orderPanel_1.setBackground(Color.WHITE);
-		orderPanel.add(orderPanel_1, BorderLayout.CENTER);
 		
 		JPanel orderDeliveryPanel = new JPanel();
 		orderDeliveryPanel.setLayout(null);
 		orderDeliveryPanel.setBorder(null);
 		orderDeliveryPanel.setBackground(new Color(226, 226, 226));
 		orderDeliveryPanel.setBounds(12, 10, 348, 102);
-		orderPanel_1.add(orderDeliveryPanel);
+		orderPanel.add(orderDeliveryPanel);
 		
 		JLabel orderDeliveryInfoLB = new JLabel("배송정보");
 		orderDeliveryInfoLB.setFont(new Font("D2Coding ligature", Font.PLAIN, 14));
@@ -78,22 +72,22 @@ public class OrderPanel extends JPanel {
 		JPanel orderNumberOfItemPanel = new JPanel();
 		orderNumberOfItemPanel.setLayout(null);
 		orderNumberOfItemPanel.setBounds(12, 148, 348, 30);
-		orderPanel_1.add(orderNumberOfItemPanel);
+		orderPanel.add(orderNumberOfItemPanel);
 		
-		orderNumberOfItemtLB = new JLabel("");
+		JLabel orderNumberOfItemtLB = new JLabel("");
 		orderNumberOfItemtLB.setBounds(12, 0, 75, 30);
 		orderNumberOfItemPanel.add(orderNumberOfItemtLB);
 		
 		JButton orderBTN = new JButton("주문 하기");
 		orderBTN.setBounds(12, 429, 348, 43);
-		orderPanel_1.add(orderBTN);
+		orderPanel.add(orderBTN);
 		
 		JPanel orderTotalPricePanel = new JPanel();
 		orderTotalPricePanel.setLayout(null);
 		orderTotalPricePanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		orderTotalPricePanel.setBackground(Color.WHITE);
 		orderTotalPricePanel.setBounds(12, 376, 348, 30);
-		orderPanel_1.add(orderTotalPricePanel);
+		orderPanel.add(orderTotalPricePanel);
 		
 		JLabel orderTotalNameLB = new JLabel("최종 결제 금액");
 		orderTotalNameLB.setFont(new Font("D2Coding ligature", Font.BOLD, 14));
@@ -108,20 +102,21 @@ public class OrderPanel extends JPanel {
 		
 		JScrollPane orderListScrollPane = new JScrollPane();
 		orderListScrollPane.setBounds(12, 178, 348, 188);
-		orderPanel_1.add(orderListScrollPane);
+		orderPanel.add(orderListScrollPane);
 		
 		JPanel orderListPanel = new JPanel();
 		orderListPanel.setPreferredSize(new Dimension(320, 200));
 		orderListScrollPane.setViewportView(orderListPanel);
 		
 		JPanel orderDetailPanel = new JPanel();
+		orderDetailPanel.setLayout(null);
 		orderDetailPanel.setPreferredSize(new Dimension(320, 60));
 		orderListPanel.add(orderDetailPanel);
-		orderDetailPanel.setLayout(null);
 		
 		JLabel orderDetailLB = new JLabel("New label");
 		orderDetailLB.setBounds(0, 0, 320, 60);
 		orderDetailPanel.add(orderDetailLB);
 
 	}
+
 }
