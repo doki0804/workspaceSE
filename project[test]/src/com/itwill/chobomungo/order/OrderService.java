@@ -82,13 +82,11 @@ public class OrderService {
 	
 	// 주문 1개 삭제
 	public int deleteOrderNo(String userId, int o_no) throws Exception {
-		orderDao.deleteByOrderNo(userId, o_no);
-		return 0;
+		return orderDao.deleteByOrderNo(userId, o_no);
 	}
 	// 주문 전체삭제
 	public int deleteUserId(String userId) throws Exception {
-		orderDao.deleteByUserId(userId);
-		return 0;
+		return orderDao.deleteByUserId(userId);
 	}
 	// 주문목록
 	public List<Orders> orderList(String userId) throws Exception {

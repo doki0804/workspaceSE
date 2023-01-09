@@ -19,7 +19,9 @@ public class User {
 	private String userAddress;
 	private String userEmail;
 	
-	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	public User(String userId, String userPw, String userName, String userPhone, String userAddress, String userEmail) {
