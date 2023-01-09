@@ -21,7 +21,7 @@ public class ProductDaoTestMain {
 		System.out.println(">>"+productDao.delete(1));
 		
 		System.out.println("상품 번호로");
-		Product findProduct = productDao.findByNo(2);
+		Product findProduct = productDao.findByNo(1);
 		System.out.println(findProduct);
 		
 		findProduct.setP_title("자바란 무엇인가?");
