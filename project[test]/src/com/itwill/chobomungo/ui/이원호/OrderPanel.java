@@ -22,6 +22,7 @@ public class OrderPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public OrderPanel() {
+		setPreferredSize(new Dimension(400, 620));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel orderPanel = new JPanel();
