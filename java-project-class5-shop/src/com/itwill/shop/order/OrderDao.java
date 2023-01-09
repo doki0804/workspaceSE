@@ -71,7 +71,6 @@ public class OrderDao {
 		insert into orders(o_no,o_desc,o_date,o_price,userid) values (orders_o_no_SEQ.nextval,'비글외1종',sysdate-2,1050000,'guard1');
 		insert into order_item(oi_no,oi_qty,o_no,p_no) values(order_item_oi_no_SEQ.nextval,1,orders_o_no_SEQ.currval,1);
 		*/
-	
 		Connection con=null;
 		PreparedStatement pstmt1=null;
 		PreparedStatement pstmt2=null;
@@ -146,8 +145,6 @@ public class OrderDao {
 		pstmt.setString(1,sUserId);
 		pstmt.setInt(2,o_no);
 		rs=pstmt.executeQuery();
-		
-		
 		if(rs.next()) {
 			order=new Order(rs.getInt("o_no"),
 							rs.getString("o_desc"),
